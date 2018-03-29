@@ -1,49 +1,36 @@
-create database DiskPizza;
-use DiskPizza;
+CREATE DATABASE TAKEPIZZA;
+USE TAKEPIZZA;
 
-create table usuario(
-	id_usuario		 integer identity(1,1) primary key,
-	nome			 varchar(50)	 not null,
-	sobrenome		 varchar(50)	 not null,
-	tipo_telefone	 integer		 not null,
-	telefone		 integer		 not null,
-	email			 varchar(100)	 not null,
-	conf_email		 varchar(100)	 not null,
-	cpf				 varchar(11)	 not null,
-	senha			 varchar(15)	 not null,
-	conf_senha		 varchar(15)	 not null,
-	cep				 varchar(8)		 not null,
-	rua				 varchar(100)	 not null,
-	n_local			 integer		 not null
+CREATE TABLE TB_USUARIO(
+	ID_USUARIO		 INTEGER IDENTITY(1,1) PRIMARY KEY,
+	ST_NOME			 VARCHAR(50)	 NOT NULL,
+	ST_TELEFONE		 VARCHAR(20)	 NOT NULL,
+	ST_EMAIL		 VARCHAR(100)	 NOT NULL,
+	ST_CPF			 VARCHAR(11)	 NOT NULL,
+	ST_SENHA		 VARCHAR(15)	 NOT NULL,
+	ST_CEP			 VARCHAR(9)		 NOT NULL,
+	ST_RUA			 VARCHAR(100)	 NOT NULL,
+	ST_NUMEROLOCAL	 INTEGER		 NOT NULL
 );
 
-create table bebida(
-	id_bebida	 integer identity(1,1) primary key,
-	nome		 varchar(30),
-	preco		 decimal(8,2),
-	tamanho		 varchar(30)
-);
+CREATE TABLE TB_PRODUTO(
+	ID_PRODUTO	 INTEGER IDENTITY(1,1) PRIMARY KEY,
+	ST_NOME		 VARCHAR(50),
+	DT_PRECO	 DECIMAL(2,2)
+)
 
-create table pizza(
-	id_pizza		 integer identity(1,1) primary key,
-	nome			 varchar(50),
-	tamanho			 varchar(20),
-	quantidade_fatia integer,
-	igredientes		 varchar(200),
-	preco			 decimal(8,2)
-);
+CREATE TABLE TB_PIZZA(
+	ID_PIZZA	 INTEGER IDENTITY(1,1) PRIMARY KEY,
+	ST_TAMANHO	 VARCHAR(50),
+	QNT_SABORES	 INTEGER,
+	DT_PRECO	 DECIMAL(2,2)
+)
 
-create table pedido(
-	id_pedido	 integer identity(1,1) primary key,
-	id_usuario	 integer references usuario,
-	data_hora	 datetime,
-);
-
-create table item_pedido(
-	id_itemP	 integer identity(1,1) primary key,
-	id_pizza	 integer references pizza,
-	id_pedido	 integer references pedido,
-	id_bebida	 integer references bebida,
-	meia_inteira varchar(10)
-);
-
+CREATE TABLE TB_PEDIDO(
+	ID_PRODUTO		 INTEGER REFERENCES TB_PRODUTO,
+	ID_PIZZA		 INTEGER REFERENCES TB_PIZZA,
+	DATA			 DATE,
+	DT_VALOR_TOTAL	 DECIMAL(4,2),
+	ID_USUARIO		 INTEGER REFERENCES TB_USUARIO,
+	ST_STATUS		 VARCHAR(50)
+)
