@@ -204,6 +204,16 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DiskPizza.DataAccess\DiskPizza.DataAccess.csproj">
+      <Project>{1ad0f8d3-7177-4ce8-8c20-19f50aa1c17c}</Project>
+      <Name>DiskPizza.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DiskPizza.Models\DiskPizza.Models.csproj">
+      <Project>{ce06e2c8-11ee-4e78-89f9-09f32ef04be0}</Project>
+      <Name>DiskPizza.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
