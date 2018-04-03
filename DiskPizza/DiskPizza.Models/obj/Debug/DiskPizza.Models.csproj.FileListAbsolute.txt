@@ -1,0 +1,5 @@
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.Models\bin\Debug\DiskPizza.Models.dll
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.Models\bin\Debug\DiskPizza.Models.pdb
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.Models\obj\Debug\DiskPizza.Models.csproj.CoreCompileInputs.cache
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.Models\obj\Debug\DiskPizza.Models.dll
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.Models\obj\Debug\DiskPizza.Models.pdb

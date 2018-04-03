@@ -1,0 +1,6 @@
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.DataAccess\bin\Debug\DiskPizza.DataAccess.dll
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.DataAccess\bin\Debug\DiskPizza.DataAccess.pdb
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.DataAccess\obj\Debug\DiskPizza.DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.DataAccess\obj\Debug\DiskPizza.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.DataAccess\obj\Debug\DiskPizza.DataAccess.dll
+C:\Users\gusta\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.DataAccess\obj\Debug\DiskPizza.DataAccess.pdb
