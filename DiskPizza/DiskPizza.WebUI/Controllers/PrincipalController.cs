@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace DiskPizza.WebUI.Controllers
 {
-    public class LoginController : Controller
+    public class PrincipalController : Controller
     {
-        // GET: Login
+        // GET: Principal
         public ActionResult Index()
         {
             return View();
