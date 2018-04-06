@@ -1,0 +1,180 @@
+﻿@using DiskPizza.Models
+@model Usuario
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Take Pizza</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+</head>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-12 text-right">
+                        <a href="@Url.Action("Index", "Inicio")">Sair</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <img src="~/Imagens/pizza.jpg" alt="" class="img-thumbnail">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Pizza Hut</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Distancia: </label>
+                                <label>Tempo de entrega: </label>
+                                <label>Taxa de entrega:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-12">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <a href="@Url.Action("Index", "Principal")">Cardápio</a>
+                            <a href="@Url.Action("Index", "Informacoes")">Informações</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div>
+
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Doces</a></li>
+                                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Tradicionais</a></li>
+                                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Especiais</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="home">
+                                        @* Colocar uma tabela com select aqui, mas nao sei como *@
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Pizza</th>
+                                                    <th>Broto</th>
+                                                    <th>Média</th>
+                                                    <th>Grande</th>
+                                                    <th>Gigante</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Chocolate</td>
+                                                    <td>10,00</td>
+                                                    <td>11,00</td>
+                                                    <td>12,00</td>
+                                                    <td>13,00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sensação</td>
+                                                    <td>10,00</td>
+                                                    <td>11,00</td>
+                                                    <td>12,00</td>
+                                                    <td>13,00</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="profile">
+                                        @* Colocar uma tabela com select aqui, mas nao sei como *@
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Pizza</th>
+                                                    <th>Broto</th>
+                                                    <th>Média</th>
+                                                    <th>Grande</th>
+                                                    <th>Gigante</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Calabresa</td>
+                                                    <td>10,00</td>
+                                                    <td>11,00</td>
+                                                    <td>12,00</td>
+                                                    <td>13,00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4 queijos</td>
+                                                    <td>10,00</td>
+                                                    <td>11,00</td>
+                                                    <td>12,00</td>
+                                                    <td>13,00</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="messages">
+                                        @* Colocar uma tabela com select aqui, mas nao sei como *@
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Pizza</th>
+                                                    <th>Broto</th>
+                                                    <th>Média</th>
+                                                    <th>Grande</th>
+                                                    <th>Gigante</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Camarão</td>
+                                                    <td>10,00</td>
+                                                    <td>11,00</td>
+                                                    <td>12,00</td>
+                                                    <td>13,00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Napolitana</td>
+                                                    <td>10,00</td>
+                                                    <td>11,00</td>
+                                                    <td>12,00</td>
+                                                    <td>13,00</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @* Colocar um mapa aqui, mas nao sei como *@
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14406.658258837904!2d-49.31384896052396!3d-25.482873840224528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce3721cabd4bb%3A0x8f3ff96168aa61a5!2sSistema+Fiep+-+Sesi%2FSenai%2FIEL+-+Port%C3%A3o%2C+Curitiba!5e0!3m2!1spt-BR!2sbr!4v1522972293759" frameborder="0" style="border:0; width: 100%; height: 450px;" ></iframe>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>
