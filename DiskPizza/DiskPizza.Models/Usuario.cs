@@ -19,6 +19,6 @@ namespace DiskPizza.Models
         public string Cep              { get; set; }
         public string Rua              { get; set; }
         public string NumeroL          { get; set; }
-        public int Administrador       { get; set; }
+        public bool Administrador       { get; set; }
     }
 }
