@@ -11,6 +11,6 @@ namespace DiskPizza.Models
         public int               Id                  { get; set; }
         public Pedido            Pedido              { get; set; }
         public Produto_x_Tamanho Produto_x_Tamanho   { get; set; }
-        public float             Preco_item          { get; set; }
+        public decimal           Preco_item          { get; set; }
     }
 }

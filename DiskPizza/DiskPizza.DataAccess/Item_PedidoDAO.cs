@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DiskPizza.Models;
-using System.Data.SqlClient;
 using System.Data;
 
 namespace DiskPizza.DataAccess
 {
-    class Prod_x_TamanhoDAO
+    class Item_PedidoDAO
     {
-        public void Inserir(Produto_x_Tamanho obj)
+        public void Inserir(Item_Pedido obj)
         {
             //Criando uma conexão com o banco de dados
             using (SqlConnection conn =
@@ -20,17 +20,17 @@ namespace DiskPizza.DataAccess
                                     Integrated Security=SSPI;"))
             {
                 //Criando instrução sql para inserir na tabela de estados
-                string strSQL = @"INSERT INTO TB_PRODUTO_X_TAMANHO(DT_PRECO_TOTAL, ID_PRODUTO, ID_TAMANHO)
-                                    VALUES (@DT_PRECO_TOTAL, @ID_PRODUTO, @ID_TAMANHO);";
+                string strSQL = @"INSERT INTO TB_ITEM_PEDIDO(ID_PEDIDO, ID_PRODXTAMANHO, PRECO_ITEM)
+                                    VALUES (@ID_PEDIDO, @ID_PRODXTAMANHO, @PRECO_ITEM);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
                     //Preenchendo os parâmetros da instrução sql
-                    cmd.Parameters.Add("@DT_PRECO_TOTAL", SqlDbType.Decimal).Value = obj.Preco_Total;
-                    cmd.Parameters.Add("@ID_PRODUTO", SqlDbType.Int).Value = obj.Produto.Id;
-                    cmd.Parameters.Add("@ID_TAMANHO", SqlDbType.Int).Value = obj.Tamanho.Id;
+                    cmd.Parameters.Add("@ID_PEDIDO", SqlDbType.Decimal).Value = obj.Pedido.Id;
+                    cmd.Parameters.Add("@ID_PRODXTAMANHO", SqlDbType.Int).Value = obj.Produto_x_Tamanho.Id;
+                    cmd.Parameters.Add("@PRECO_ITEM", SqlDbType.Decimal).Value = obj.Preco_item;
 
                     //Abrindo conexão com o banco de dados
                     conn.Open();
@@ -42,9 +42,9 @@ namespace DiskPizza.DataAccess
             }
         }
 
-        public List<Produto_x_Tamanho> BuscarTodos()
+        public List<Item_Pedido> BuscarTodos()
         {
-            var lst = new List<Produto_x_Tamanho>();
+            var lst = new List<Item_Pedido>();
 
             //Criando uma conexão com o banco de dados
             using (SqlConnection conn =
@@ -54,14 +54,15 @@ namespace DiskPizza.DataAccess
             {
                 //Criando instrução sql para selecionar todos os registros na tabela de estados
                 string strSQL = @"SELECT 
-                                    pt.*, 
-                                    p.ST_NOME AS NOME_PRODUTO,  
-                                    p.ST_TIPO AS TIPO_PRODUTO, 
-                                    p.DT_PRECO AS PRECO_PRODUTO,
-                                    t.ST_NOME AS TAMANHO_NOME
-                                FROM TB_PRODUTO_X_TAMANHO pt
-                                INNER JOIN TB_PRODUTO p ON (p.ID_PRODUTO = pt.ID_PRODUTO)
-                                INNER JOIN TB_TAMANHO t ON (t.ID_TAMANHO = pt.ID_TAMANHO);";
+                                    ip.*,
+                                    p.DT_DATA AS DATA_PEDIDO,
+                                    p.QNT_SABORES AS QUANTIDADE_SABORES,
+                                    p.ST_STATUS AS STATUS_PEDIDO,
+                                    p.ST_TAMANHO AS TAMANHO_PEDIDO,
+                                    pt.DT_PRECO_TOTAL AS PRECO_TOTAL
+                                FROM TB_ITEM_PEDIDO ip
+                                INNER JOIN TB_PEDIDO p ON (p.ID_PEDIDO = ip.ID_PEDIDO)
+                                INNER JOIN TB_PRODUTO_X_TAMANHO pt ON (pt.ID_TAMANHO = ip.ID_TAMANHO);";
 
                 //Criando um comando sql que será executado na base d edados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -80,25 +81,26 @@ namespace DiskPizza.DataAccess
                     //Perconrrendo todos os registros encontrados na base de dados e adicionando em uma lista
                     foreach (DataRow row in dt.Rows)
                     {
-                        var produto_x_tamanho = new Produto_x_Tamanho()
+                        var item_pedido = new Item_Pedido()
                         {
-                            Id = Convert.ToInt32(row["ID_PRODXTAMANHO"]),
-                            Preco_Total = Convert.ToDecimal(row["DT_PRECO_TOTAL"]),
-                            Produto = new Produto()
+                            Id = Convert.ToInt32(row["ID_ITEM"]),
+                            Preco_item = Convert.ToDecimal(row["PRECO_ITEM"]),
+                            Pedido = new Pedido()
                             {
-                                Id = Convert.ToInt32(row["ID_PRODUTO"]),
-                                Nome = row["NOME_PRODUTO"].ToString(),
-                                Tipo = row["TIPO_PRODUTO"].ToString(),
-                                Preco = Convert.ToDecimal(row["PRECO_PRODUTO"])
+                                Id = Convert.ToInt32(row["ID_PEDIDO"]),
+                                Data = Convert.ToDateTime(row["DATA_PEDIDO"]),
+                                Qtd_sabores = Convert.ToInt32(row["QUANTIDADE_SABORES"]),
+                                Status = row["STATUS_PEDIDO"].ToString(),
+                                Tamanho = row["TAMANHO_PEDIDO"].ToString()
                             },
-                            Tamanho = new Tamanho()
+                            Produto_x_Tamanho = new Produto_x_Tamanho()
                             {
-                                Id = Convert.ToInt32(row["ID_TAMANHO"]),
-                                Nome = row["TAMANHO_NOME"].ToString()
+                                Id = Convert.ToInt32(row["ID_PRODXTAMANHO"]),
+                                Preco_Total = Convert.ToDecimal(row["PRECO_TOTAL"]),
                             }
                         };
 
-                        lst.Add(produto_x_tamanho);
+                        lst.Add(item_pedido);
                     }
                 }
             }
