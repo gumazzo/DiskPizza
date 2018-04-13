@@ -9,7 +9,7 @@ using System.Data;
 
 namespace DiskPizza.DataAccess
 {
-    class TamanhoDAO
+    public class TamanhoDAO
     {
         public void Inserir(Tamanho obj)
         {

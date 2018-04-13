@@ -9,7 +9,7 @@ using System.Data;
 
 namespace DiskPizza.DataAccess
 {
-    class InicioDAO
+    public class InicioDAO
     {
         public void Inserir(Usuario obj)
         {
@@ -21,7 +21,7 @@ namespace DiskPizza.DataAccess
             {
                 //Criando instrução sql para inserir na tabela de estados
                 string strSQL = @"INSERT INTO TB_USUARIO(ST_NOME, ST_TELEFONE, ST_EMAIL,ST_CPF,ST_SENHA, ST_CEP, ST_RUA, ST_NUMEROLOCAL, DT_ADMINISTRADOR)
-                                    VALUES (@ST_NOME, @ST_TELEFONE,@ST_EMAIL,@ST_CPF,@ST_SENHA,@ST_CEP,@ST_RUA,@STNUMEROLOCAL,@DT_ADMINISTRADOR);";
+                                    VALUES (@ST_NOME, @ST_TELEFONE,@ST_EMAIL,@ST_CPF,@ST_SENHA,@ST_CEP,@ST_RUA,@ST_NUMEROLOCAL,@DT_ADMINISTRADOR);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))

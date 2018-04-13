@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 text-left">
-                                            <form class="form-horizontal">
+                                            <form action="@Url.Action("Salvar", "Inicio")" class="form-horizontal">
                                                 <div class="form-group ">
                                                     <div class="col-md-12">
                                                         @Html.LabelFor(m => m.Nome, "Nome Completo:", new { @class = "control-label text-center" })
@@ -46,9 +46,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         @Html.LabelFor(m => m.Telefone, "Telefone:", new { @class = "control-label" })
                                                         @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        @Html.LabelFor(m => m.Cpf, "CPF :", new { @class = "control-label" })
+                                                        @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control", @placeholder = "120.499.299-19" })
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -63,29 +67,19 @@
                                                         @Html.TextBoxFor(m => m.ConfEmail, new { @class = "form-control" })
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        @Html.LabelFor(m => m.Cpf, "CPF :", new { @class = "control-label" })
-                                                        @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control", @placeholder = "120.499.299-19" })
-                                                    </div>
-                                                </div>
                                                 <div class="form-group ">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         @Html.LabelFor(m => m.Senha, "Senha:", new { @class = "control-label text-center" })
                                                         @Html.PasswordFor(m => m.Senha, new { @class = "form-control" })
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         @Html.LabelFor(m => m.ConfSenha, "Confirmação de Senha:", new { @class = "control-label text-center" })
                                                         @Html.PasswordFor(m => m.ConfSenha, new { @class = "form-control" })
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12 text-right">
-                                                        <a href=@Url.Action("Index", "Inicio")>
-                                                            <input type="button" class="btn btn-primary" value="Cadastrar" onclick="alert('Cadastrado com sucesso'); return true;" />
-                                                        </a>
+                                                        <button type="submit" class="btn btn-primary" value="Cadastrar" />Cadastrar
                                                     </div>
                                                 </div>
                                             </form>
@@ -159,7 +153,7 @@
                                         <div class="container">
                                             <div class="form-group text-center">
                                                 <label>Complete suas informações</label>
-                                            </div>                                            
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-12 text-left">
                                                     <form class="form-horizontal">

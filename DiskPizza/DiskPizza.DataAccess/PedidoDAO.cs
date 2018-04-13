@@ -9,7 +9,7 @@ using System.Data;
 
 namespace DiskPizza.DataAccess
 {
-    class PedidoDAO
+    public class PedidoDAO
     {
         public void Inserir(Pedido obj)
         {
