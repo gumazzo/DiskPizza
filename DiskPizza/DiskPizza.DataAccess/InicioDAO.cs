@@ -33,9 +33,9 @@ namespace DiskPizza.DataAccess
                     cmd.Parameters.Add("@ST_EMAIL", SqlDbType.VarChar).Value = obj.Email;
                     cmd.Parameters.Add("@ST_CPF", SqlDbType.VarChar).Value = obj.Cpf;
                     cmd.Parameters.Add("@ST_SENHA", SqlDbType.VarChar).Value = obj.Senha;
-                    cmd.Parameters.Add("@ST_CEP", SqlDbType.VarChar).Value = obj.Cep;
-                    cmd.Parameters.Add("@ST_RUA", SqlDbType.VarChar).Value = obj.Rua;
-                    cmd.Parameters.Add("@ST_NUMEROLOCAL", SqlDbType.VarChar).Value = obj.NumeroL;
+                    cmd.Parameters.Add("@ST_CEP", SqlDbType.VarChar).Value = obj.Cep ?? string.Empty;
+                    cmd.Parameters.Add("@ST_RUA", SqlDbType.VarChar).Value = obj.Rua ?? string.Empty;
+                    cmd.Parameters.Add("@ST_NUMEROLOCAL", SqlDbType.VarChar).Value = obj.NumeroL ?? string.Empty;
                     cmd.Parameters.Add("@DT_ADMINISTRADOR", SqlDbType.Bit).Value = obj.Administrador;
 
                     //Abrindo conexão com o banco de dados
