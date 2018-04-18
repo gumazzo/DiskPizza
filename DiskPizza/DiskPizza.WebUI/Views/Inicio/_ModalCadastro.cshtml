@@ -1,0 +1,64 @@
+﻿@using DiskPizza.Models
+@model Usuario
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="@Url.Content("~/Imagens/pizza.jpg")" width="375" height="300" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-left">
+                        <form action="@Url.Action("Salvar", "Inicio")" class="form-horizontal">
+                            <div class="form-group ">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.Nome, "Nome Completo:", new { @class = "control-label text-center" })
+                                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(m => m.Telefone, "Telefone:", new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(m => m.Cpf, "CPF :", new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control", @placeholder = "120.499.299-19" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.Email, "Email :", new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "gustavo_roberto15@hotmail.com" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.ConfEmail, "Confirmação de Email :", new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.ConfEmail, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(m => m.Senha, "Senha:", new { @class = "control-label text-center" })
+                                    @Html.PasswordFor(m => m.Senha, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(m => m.ConfSenha, "Confirmação de Senha:", new { @class = "control-label text-center" })
+                                    @Html.PasswordFor(m => m.ConfSenha, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

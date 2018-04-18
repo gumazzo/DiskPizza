@@ -199,6 +199,8 @@
     <Content Include="Views\Inicio\Index.cshtml" />
     <Content Include="Views\Principal\Index.cshtml" />
     <Content Include="Views\Informacoes\Index.cshtml" />
+    <Content Include="Views\Inicio\_ModalCadastro.cshtml" />
+    <Content Include="Views\Inicio\_ModalLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

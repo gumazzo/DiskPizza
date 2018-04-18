@@ -20,8 +20,8 @@ namespace DiskPizza.DataAccess
                                     Integrated Security=SSPI;"))
             {
                 //Criando instrução sql para inserir na tabela de estados
-                string strSQL = @"INSERT INTO TB_PEDIDO(DT_DATA, ST_TAMANHO, QNT_SABORES, ST_STATUS, ID_USUARIO)
-                                    VALUES (@DT_DATA, @ST_TAMANHO, @QNT_SABORES, @ST_STATUS, @ID_USUARIO);";
+                string strSQL = @"INSERT INTO TB_PEDIDO( DT_DATA, ST_TAMANHO, QNT_SABORES, ST_STATUS, ID_USUARIO, ST_CEP, ST_RUA, ST_NUMEROLOCAL)
+                                    VALUES ( @DT_DATA, @ST_TAMANHO, @QNT_SABORES, @ST_STATUS, @ID_USUARIO, @ST_CEP, @ST_RUA, @ST_NUMEROLOCAL);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -33,8 +33,11 @@ namespace DiskPizza.DataAccess
                     cmd.Parameters.Add("@QNT_SABORES", SqlDbType.Int).Value = obj.Qtd_sabores;
                     cmd.Parameters.Add("@ST_STATUS", SqlDbType.VarChar).Value = obj.Status;
                     cmd.Parameters.Add("@ID_USUARIO", SqlDbType.Int).Value = obj.Usuario.Id;
-                    
-                    
+                    cmd.Parameters.Add("@ST_CEP", SqlDbType.VarChar).Value = obj.Cep ?? string.Empty;
+                    cmd.Parameters.Add("@ST_RUA", SqlDbType.VarChar).Value = obj.Rua ?? string.Empty;
+                    cmd.Parameters.Add("@ST_NUMEROLOCAL", SqlDbType.VarChar).Value = obj.NumeroL ?? string.Empty;
+
+
 
                     //Abrindo conexão com o banco de dados
                     conn.Open();
@@ -82,7 +85,10 @@ namespace DiskPizza.DataAccess
                             Data = Convert.ToDateTime(row["DT_DATA"]),
                             Qtd_sabores = Convert.ToInt32(row["QNT_SABORES"]),
                             Status = row["ST_STATUS"].ToString(),
-                            Tamanho = row["ST_TAMANHO"].ToString()
+                            Tamanho = row["ST_TAMANHO"].ToString(),
+                            Cep = row["ST_CEP"].ToString(),
+                            Rua = row["ST_RUA"].ToString(),
+                            NumeroL = row["ST_NUMEROLOCAL"].ToString()
                         };
 
                         lst.Add(pedido);

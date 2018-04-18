@@ -20,8 +20,8 @@ namespace DiskPizza.DataAccess
                                     Integrated Security=SSPI;"))
             {
                 //Criando instrução sql para inserir na tabela de estados
-                string strSQL = @"INSERT INTO TB_PRODUTO_X_TAMANHO(DT_PRECO_TOTAL, ID_PRODUTO, ID_TAMANHO)
-                                    VALUES (@DT_PRECO_TOTAL, @ID_PRODUTO, @ID_TAMANHO);";
+                string strSQL = @"INSERT INTO TB_PRODUTO_X_TAMANHO( DT_PRECO_TOTAL, ID_PRODUTO, ID_TAMANHO)
+                                    VALUES ( @DT_PRECO_TOTAL, @ID_PRODUTO, @ID_TAMANHO);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
