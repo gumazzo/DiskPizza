@@ -143,52 +143,23 @@
                             @Html.TextBoxFor(m => m.Cep, new { @class = "form-control", @placeholder = "81480-147" })
                         </div>
                     </div>
+                    <div class="form-group ">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.Rua, "Rua:", new { @class = "control-label text-center" })
+                            @Html.TextBoxFor(m => m.Rua, new { @class = "form-control", @placeholder = "AUTOMATICO" })
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-md-2">
+                            @Html.LabelFor(m => m.NumeroL, "Número:", new { @class = "control-label text-center" })
+                            @Html.TextBoxFor(m => m.NumeroL, new { @class = "form-control", @placeholder = "32213" })
+                        </div>
+                    </div>
                     <div class="form-group">
-                        <div class="col-md-8 text-right">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg2">Entrar</button>
-
-                            <div class="modal fade bs-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="container">
-                                            <div class="form-group text-center">
-                                                <label>Complete suas informações</label>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 text-left">
-                                                    <form class="form-horizontal">
-                                                        <div class="form-group">
-                                                            <div class="col-md-12">
-                                                                @Html.LabelFor(m => m.Cep, "CEP :", new { @class = "control-label" })
-                                                                @Html.TextBoxFor(m => m.Cep, new { @class = "form-control", @placeholder = "AUTOMATICO" })
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <div class="col-md-12">
-                                                                @Html.LabelFor(m => m.Rua, "Rua:", new { @class = "control-label text-center" })
-                                                                @Html.TextBoxFor(m => m.Rua, new { @class = "form-control", @placeholder = "AUTOMATICO" })
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <div class="col-md-2">
-                                                                @Html.LabelFor(m => m.NumeroL, "Número:", new { @class = "control-label text-center" })
-                                                                @Html.TextBoxFor(m => m.NumeroL, new { @class = "form-control", @placeholder = "32213" })
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-md-12 text-right">
-                                                                <a href=@Url.Action("Index", "Principal")>
-                                                                    <input type="button" class="btn btn-primary" value="Entrar" ; return true;" />
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-12 text-right">
+                            <a href=@Url.Action("Index", "Principal")>
+                                <input type="button" class="btn btn-primary" value="Entrar" ; return true;" />
+                            </a>
                         </div>
                     </div>
                 </form>

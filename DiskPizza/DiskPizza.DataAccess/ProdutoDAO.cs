@@ -20,8 +20,8 @@ namespace DiskPizza.DataAccess
                                     Integrated Security=SSPI;"))
             {
                 //Criando instrução sql para inserir na tabela de estados
-                string strSQL = @"INSERT INTO TB_PRODUTO(ST_NOME, ST_TIPO, DT_PRECO)
-                                    VALUES (@ST_NOME, @ST_TIPO, @DT_PRECO);";
+                string strSQL = @"INSERT INTO TB_PRODUTO(ST_NOME, ST_TIPO, DT_PRECO,ST_CEP,ST_RUA,ST_NUMEROLOCAL)
+                                    VALUES (@ST_NOME, @ST_TIPO, @DT_PRECO,@ST_CEP,@ST_RUA,@ST_NUMEROLOCAL);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -31,6 +31,9 @@ namespace DiskPizza.DataAccess
                     cmd.Parameters.Add("@ST_NOME", SqlDbType.VarChar).Value = obj.Nome;
                     cmd.Parameters.Add("@ST_TIPO", SqlDbType.VarChar).Value = obj.Tipo;
                     cmd.Parameters.Add("@DT_PRECO", SqlDbType.Decimal).Value = obj.Preco;
+                    cmd.Parameters.Add("@ST_CEP", SqlDbType.VarChar).Value = obj.Cep ?? string.Empty;
+                    cmd.Parameters.Add("@ST_RUA", SqlDbType.VarChar).Value = obj.Rua ?? string.Empty;
+                    cmd.Parameters.Add("@ST_NUMEROLOCAL", SqlDbType.VarChar).Value = obj.NumeroL ?? string.Empty;
 
                     //Abrindo conexão com o banco de dados
                     conn.Open();
@@ -77,7 +80,10 @@ namespace DiskPizza.DataAccess
                             Id = Convert.ToInt32(row["ID_PRODUTO"]),
                             Nome = row["ST_NOME"].ToString(),
                             Tipo = row["ST_TIPO"].ToString(),
-                            Preco = Convert.ToDecimal(row["DT_PRODUTO"])
+                            Preco = Convert.ToDecimal(row["DT_PRODUTO"]),
+                            Cep = row["ST_CEP"].ToString(),
+                            Rua = row["ST_RUA"].ToString(),
+                            NumeroL = row["ST_NUMEROLOCAL"].ToString(),
                         };
 
                         lst.Add(produto);

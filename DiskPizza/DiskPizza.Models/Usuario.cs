@@ -16,9 +16,6 @@ namespace DiskPizza.Models
         public string Cpf              { get; set; }
         public string Senha            { get; set; }
         public string ConfSenha        { get; set; }
-        public string Cep              { get; set; }
-        public string Rua              { get; set; }
-        public string NumeroL          { get; set; }
         public bool Administrador       { get; set; }
     }
 }
