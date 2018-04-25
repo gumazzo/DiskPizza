@@ -1,5 +1,5 @@
 ﻿@using DiskPizza.Models
-@model Pedido
+@model Usuario
 @{
     Layout = "";
 }
@@ -23,39 +23,32 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="form-group text-right">
-                <div class="col-md-12">
-                    <a href="@Url.Action("Index", "Cadastro")">Cadastrar</a> | <a href="@Url.Action("Index", "Login")">Logar</a>
-                </div>
-            </div>
             <div class="col-md-3 col-md-offset-3 text-center">
                 <img src="@Url.Content("~/Imagens/pizza.jpg")" width="375" height="300" />
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <form class="form-horizontal">
+            <div class="class=" col-md-6 col-md-offset-3">
+                <form action="@Url.Action("Entrar", "Login")" class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-8">
-                            @Html.LabelFor(m => m.Cep, "CEP", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Cep, new { @class = "form-control", @placeholder = "81480-147" })
+                            @Html.LabelFor(m => m.Email, "E-mail :", new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "gustavo_roberto15@hotmail.com" })
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.Rua, "Rua:", new { @class = "control-label text-center" })
-                            @Html.TextBoxFor(m => m.Rua, new { @class = "form-control", @placeholder = "AUTOMATICO" })
-                        </div>
-                        <div class="col-md-2">
-                            @Html.LabelFor(m => m.NumeroL, "Número:", new { @class = "control-label text-center" })
-                            @Html.TextBoxFor(m => m.NumeroL, new { @class = "form-control", @placeholder = "32213" })
+                        <div class="col-md-8">
+                            @Html.LabelFor(m => m.Senha, "Senha:", new { @class = "control-label text-center" })
+                            @Html.PasswordFor(m => m.Senha, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-8 text-right">
-                            <a href=@Url.Action("Index", "Principal")>
-                                <input type="button" class="btn btn-primary" value="Entrar" />
+                            <a href=@Url.Action("Index", "Inicio")>
+                                <input type="button" class="btn btn-primary" value="Voltar" />
                             </a>
+                            <input type="submit" class="btn btn-primary" value="Entrar" />
+
                         </div>
                     </div>
                 </form>
