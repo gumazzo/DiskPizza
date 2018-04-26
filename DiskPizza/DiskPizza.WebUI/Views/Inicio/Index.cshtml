@@ -10,6 +10,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="@Url.Content("~/Content/Inicio.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,17 +24,14 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="form-group text-right">
+            <div class="form-group text-right" id="Links">
                 <div class="col-md-12">
                     <a href="@Url.Action("Index", "Cadastro")">Cadastrar</a> | <a href="@Url.Action("Index", "Login")">Logar</a>
                 </div>
             </div>
-            <div class="col-md-3 col-md-offset-3 text-center">
-                <img src="@Url.Content("~/Imagens/pizza.jpg")" width="375" height="300" />
-            </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-6 col-md-offset-3" id="camposInicio">
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-8">
