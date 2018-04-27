@@ -4,22 +4,15 @@
     padding: 0;
     margin: 0;
 }
-
 .container {
     padding: 25px;
     position: center;
 }
-
-#Links {
-   text-align: right;
-}
-
-#camposInicio {
-    margin-top: 250px;
+#camposLogin {
+    margin-top: 300px;
     color: black;
     background-color: white;
 }
-
 .form-login {
     background-color: #EDEDED;
     padding-top: 10px;
@@ -27,16 +20,16 @@
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 15px;
-    border-color: #d2d2d2;
+    border-color:#d2d2d2;
     border-width: 5px;
-    box-shadow: 0 1px 0 #cfcfcf;
+    box-shadow:0 1px 0 #cfcfcf;
 }
 
-h4 {
-    border: 0 solid #fff;
-    border-bottom-width: 1px;
-    padding-bottom: 10px;
-    text-align: center;
+h4 { 
+ border:0 solid #fff; 
+ border-bottom-width:1px;
+ padding-bottom:10px;
+ text-align: center;
 }
 
 .form-control {
