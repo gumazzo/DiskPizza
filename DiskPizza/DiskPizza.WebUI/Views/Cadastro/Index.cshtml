@@ -27,6 +27,11 @@
         <div class="row">
             <div class="col-md-offset-3 col-md-6 text-left" id="campos">
                 <form action="@Url.Action("Salvar", "Inicio")" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <h3>CADASTRAR</h3>
+                        </div>
+                    </div>
                     <div class="form-group ">
                         <div class="col-md-12">
                             @Html.LabelFor(m => m.Nome, "Nome Completo:", new { @class = "control-label text-center" })
@@ -36,11 +41,11 @@
                     <div class="form-group">
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Telefone, "Telefone:", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Telefone, new { @id = "txtPHONE", @class = "form-control" })
                         </div>
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Cpf, "CPF :", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control", @placeholder = "120.499.299-19" })
+                            @Html.TextBoxFor(m => m.Cpf, new { @id = "txtCPF", @class = "form-control", @placeholder = "120.499.299-19" })
                         </div>
                     </div>
                     <div class="form-group">
@@ -77,5 +82,14 @@
             </div>
         </div>
     </div>
+    <script src="~/Scripts/meiomask.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#txtCPF").setMask("cpf");
+        });
+        $(document).ready(function () {
+            $("#txtPHONE").setMask("phone");
+        });
+    </script>
 </body>
 </html>

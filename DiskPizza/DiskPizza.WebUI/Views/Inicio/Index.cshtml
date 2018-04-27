@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="@Url.Content("~/Content/Inicio.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,8 +35,13 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-8">
+                            <h3>COMO TE ENCONTRAR?</h3>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-8">
                             @Html.LabelFor(m => m.Cep, "CEP", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Cep, new { @class = "form-control", @placeholder = "81480-147" })
+                            @Html.TextBoxFor(m => m.Cep, new {@id = "txtCEP", @class = "form-control", @placeholder = "81480-147" })
                         </div>
                     </div>
                     <div class="form-group ">
@@ -60,5 +65,11 @@
             </div>
         </div>
     </div>
+    <script src="~/Scripts/meiomask.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#txtCEP").setMask("cep");
+        });
+    </script>
 </body>
 </html>
