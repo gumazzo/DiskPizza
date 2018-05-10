@@ -78,8 +78,7 @@ namespace DiskPizza.DataAccess
                             Id = Convert.ToInt32(row["ID_PRODUTO"]),
                             Nome = row["ST_NOME"].ToString(),
                             Tipo = row["ST_TIPO"].ToString(),
-                            Preco = Convert.ToDecimal(row["DT_PRODUTO"])
-                            
+                            Preco = Convert.ToDecimal(row["DT_PRECO"])
                         };
 
                         lst.Add(produto);
