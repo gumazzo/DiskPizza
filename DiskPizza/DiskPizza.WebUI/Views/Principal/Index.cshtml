@@ -1,8 +1,6 @@
 ﻿@using DiskPizza.Models
-@model Usuario
-@{
-    Layout = "";
-}
+@model Produto
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,25 +18,24 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
 </head>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-md-12 text-right">
-                        <a href="@Url.Action("Index", "Inicio")">Sair</a>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-2">
-                        <img src="~/Imagens/pizza.jpg" alt="" class="img-thumbnail">
-                    </div>
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label>Pizza Hut</label>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal">
+                   
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <img src="~/Imagens/pizza.jpg" alt="" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Pizza Hut</label>
+                                </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="col-md-12">
                                 <label>Distancia: </label>
@@ -47,104 +44,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-12">
 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <a href="@Url.Action("Index", "Principal")">Cardápio</a>
-                            <a href="@Url.Action("Index", "Informacoes")">Informações</a>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            @* Colocar uma tabela aqui, mas nao sei como *@
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Pizza Doces</th>
-                                        <th>Pizza Tradicional</th>
-                                        <th>Pizza Especial</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Coluna 1
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                        <td>
-                                            Coluna 2
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                        <td>
-                                            Coluna 3
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Coluna 1
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                        <td>
-                                            Coluna 2
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                        <td>
-                                            Coluna 3
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Coluna 1
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                        <td>
-                                            Coluna 2
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                        <td>
-                                            Coluna 3
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Coluna 1
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                        <td>
-                                            Coluna 2
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                        <td>
-                                            Coluna 3
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Coluna 1
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                        <td>
-                                            Coluna 2
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                        <td>
-                                            Coluna 3
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <hr />
                     <div class="form-group">
                         <div class="col-md-12">
                             <h3>Meu pedido</h3>
@@ -153,27 +53,56 @@
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <label class="control-label">Quantidade de sabores:</label>
-                            <input type="radio" readonly="readonly" /> 1
-                            <input type="radio" readonly="readonly" /> 2
-                            <input type="radio" readonly="readonly" /> 3
-                            <input type="radio" readonly="readonly" /> 4
+                            <label class="control-label">Tamanho:</label>
+                            <input id="broto" type="radio" name="tamanho" /> Broto
+                            <input id="media" type="radio" name="tamanho" /> Média
+                            <input id="grande" type="radio" name="tamanho" /> Grande
+                            <input id="gigante" type="radio" name="tamanho" /> Gigante
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <label class="control-label">Tamanho:</label>
-                            <input type="radio" /> Broto
-                            <input type="radio" /> Média
-                            <input type="radio" /> Grande
-                            <input type="radio" /> Gigante
+                            <label class="control-label">Quantidade de sabores:</label>
+                            <input id="sabor1" type="radio" disabled="disabled" name="sabores" /> 1
+                            <input id="sabor2" type="radio" disabled="disabled" name="sabores" /> 2
+                            <input id="sabor3" type="radio" disabled="disabled" name="sabores" /> 3
+                            <input id="sabor4" type="radio" disabled="disabled" name="sabores" /> 4
                         </div>
                     </div>
 
+                    <div id="cardapio" class="form-group" style="display: none;">
+                        <div class="col-md-12">
+                            @* Colocar uma tabela aqui, mas nao sei como *@
+                            @foreach (var tipo in (List<String>)ViewBag.Tipos)
+                            {
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>@tipo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var pizza in ((List<Produto>)ViewBag.Pizzas).Where(o => o.Tipo == tipo))
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @pizza.Nome
+                                                    <a class="lnkAdd" href="#">
+                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-left: 15px;"></span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+                    </div>
 
+                    <hr />
 
-                    <div class="form-group">
+                    <div id="pedido" class="form-group" style="display: none;">
                         <div class="col-md-12">
                             <table class="table table-striped">
                                 <thead>
@@ -199,6 +128,7 @@
 
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="col-md-12 text-right">
                             <a href=@Url.Action("Index", "Pagamento")>
@@ -206,9 +136,77 @@
                             </a>
                         </div>
                     </div>
-                </div>
-            </form>
+
+                </form>
+            </div>
         </div>
     </div>
-</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#broto").change(function () {
+                $("#sabor1").removeAttr("checked");
+                $("#sabor2").removeAttr("checked");
+                $("#sabor3").removeAttr("checked");
+                $("#sabor4").removeAttr("checked");
+                $("#cardapio").hide();
+                $("#pedido").hide();
+
+                $("#sabor1").removeAttr("disabled");
+                $("#sabor2").removeAttr("disabled");
+                $("#sabor3").attr("disabled", "disabled");
+                $("#sabor4").attr("disabled", "disabled");
+            });
+
+            $("#media").change(function () {
+                $("#sabor1").removeAttr("checked");
+                $("#sabor2").removeAttr("checked");
+                $("#sabor3").removeAttr("checked");
+                $("#sabor4").removeAttr("checked");
+                $("#cardapio").hide();
+                $("#pedido").hide();
+
+                $("#sabor1").removeAttr("disabled");
+                $("#sabor2").removeAttr("disabled");
+                $("#sabor3").removeAttr("disabled");
+                $("#sabor4").attr("disabled", "disabled");
+            });
+
+            $("#grande").change(function () {
+                $("#sabor1").removeAttr("checked");
+                $("#sabor2").removeAttr("checked");
+                $("#sabor3").removeAttr("checked");
+                $("#sabor4").removeAttr("checked");
+                $("#cardapio").hide();
+                $("#pedido").hide();
+
+                $("#sabor1").removeAttr("disabled");
+                $("#sabor2").removeAttr("disabled");
+                $("#sabor3").removeAttr("disabled");
+                $("#sabor4").attr("disabled", "disabled");
+            });
+
+            $("#gigante").change(function () {
+                $("#sabor1").removeAttr("checked");
+                $("#sabor2").removeAttr("checked");
+                $("#sabor3").removeAttr("checked");
+                $("#sabor4").removeAttr("checked");
+                $("#cardapio").hide();
+                $("#pedido").hide();
+
+                $("#sabor1").removeAttr("disabled");
+                $("#sabor2").removeAttr("disabled");
+                $("#sabor3").removeAttr("disabled");
+                $("#sabor4").removeAttr("disabled");
+            });
+
+            $('[id^=sabor]').change(function () {
+                $("#cardapio").show();
+            });
+
+            $("a.lnkAdd").click(function () {
+                $("#pedido").show();
+            });
+        });
+    </script>
+</body>
 </html>

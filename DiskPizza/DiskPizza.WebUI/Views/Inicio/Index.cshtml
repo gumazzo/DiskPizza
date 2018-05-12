@@ -1,5 +1,5 @@
 ﻿@using DiskPizza.Models
-@model Usuario
+@model Pedido
 @{
     Layout = "";
 }
@@ -10,7 +10,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Inicio.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -23,183 +24,53 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="form-group text-right">
+            <div class="form-group" id="Links">
                 <div class="col-md-12">
-                    <!-- Large modal -->
-                    <a data-toggle="modal" data-target=".bs-example-modal-lg">Cadastrar</a>
-                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-center">
-                                            <img src="@Url.Content("~/Imagens/pizza.jpg")" width="375" height="300" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 text-left">
-                                            <form class="form-horizontal">
-                                                <div class="form-group ">
-                                                    <div class="col-md-12">
-                                                        @Html.LabelFor(m => m.Nome, "Nome Completo:", new { @class = "control-label text-center" })
-                                                        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        @Html.LabelFor(m => m.Telefone, "Telefone:", new { @class = "control-label" })
-                                                        @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        @Html.LabelFor(m => m.Email, "Email :", new { @class = "control-label" })
-                                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "gustavo_roberto15@hotmail.com" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        @Html.LabelFor(m => m.ConfEmail, "Confirmação de Email :", new { @class = "control-label" })
-                                                        @Html.TextBoxFor(m => m.ConfEmail, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        @Html.LabelFor(m => m.Cpf, "CPF :", new { @class = "control-label" })
-                                                        @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control", @placeholder = "120.499.299-19" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group ">
-                                                    <div class="col-md-12">
-                                                        @Html.LabelFor(m => m.Senha, "Senha:", new { @class = "control-label text-center" })
-                                                        @Html.PasswordFor(m => m.Senha, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        @Html.LabelFor(m => m.ConfSenha, "Confirmação de Senha:", new { @class = "control-label text-center" })
-                                                        @Html.PasswordFor(m => m.ConfSenha, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12 text-right">
-                                                        <a href=@Url.Action("Index", "Inicio")>
-                                                            <input type="button" class="btn btn-primary" value="Cadastrar" onclick="alert('Cadastrado com sucesso'); return true;" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a data-toggle="modal" data-target=".bs-example-modal-lg1">Logar</a>
-                    <div class="modal fade bs-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-center">
-                                            <img src="@Url.Content("~/Imagens/pizza.jpg")" width="375" height="300" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 text-left">
-                                            <form class="form-horizontal">
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        @Html.LabelFor(m => m.Email, "Email :", new { @class = "control-label" })
-                                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "gustavo_roberto15@hotmail.com" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group ">
-                                                    <div class="col-md-12">
-                                                        @Html.LabelFor(m => m.Senha, "Senha:", new { @class = "control-label text-center" })
-                                                        @Html.PasswordFor(m => m.Senha, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12 text-right">
-                                                        <a href=@Url.Action("Index", "Inicio")>
-                                                            <input type="button" class="btn btn-primary" value="Entrar" ; return true;" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <a href="@Url.Action("Index", "Cadastro")">Cadastrar</a> | <a href="@Url.Action("Index", "Login")">Logar</a>
                 </div>
-            </div>
-            <div class="col-md-3 col-md-offset-3 text-center">
-                <img src="@Url.Content("~/Imagens/pizza.jpg")" width="375" height="300" />
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-6 col-md-offset-3" id="camposInicio">
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-8">
+                            <h3>COMO TE ENCONTRAR?</h3>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-8">
                             @Html.LabelFor(m => m.Cep, "CEP", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Cep, new { @class = "form-control", @placeholder = "81480-147" })
+                            @Html.TextBoxFor(m => m.Cep, new {@id = "txtCEP", @class = "form-control", @placeholder = "81480-147" })
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Rua, "Rua:", new { @class = "control-label text-center" })
+                            @Html.TextBoxFor(m => m.Rua, new { @class = "form-control", @placeholder = "AUTOMATICO" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.LabelFor(m => m.NumeroL, "Número:", new { @class = "control-label text-center" })
+                            @Html.TextBoxFor(m => m.NumeroL, new { @class = "form-control", @placeholder = "32213" })
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-8 text-right">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg2">Entrar</button>
-
-                            <div class="modal fade bs-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="container">
-                                            <div class="form-group text-center">
-                                                <label>Complete suas informações</label>
-                                            </div>                                            
-                                            <div class="row">
-                                                <div class="col-md-12 text-left">
-                                                    <form class="form-horizontal">
-                                                        <div class="form-group">
-                                                            <div class="col-md-12">
-                                                                @Html.LabelFor(m => m.Cep, "CEP :", new { @class = "control-label" })
-                                                                @Html.TextBoxFor(m => m.Cep, new { @class = "form-control", @placeholder = "AUTOMATICO" })
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <div class="col-md-12">
-                                                                @Html.LabelFor(m => m.Rua, "Rua:", new { @class = "control-label text-center" })
-                                                                @Html.TextBoxFor(m => m.Rua, new { @class = "form-control", @placeholder = "AUTOMATICO" })
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <div class="col-md-2">
-                                                                @Html.LabelFor(m => m.NumeroL, "Número:", new { @class = "control-label text-center" })
-                                                                @Html.TextBoxFor(m => m.NumeroL, new { @class = "form-control", @placeholder = "32213" })
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-md-12 text-right">
-                                                                <a href=@Url.Action("Index", "Principal")>
-                                                                    <input type="button" class="btn btn-primary" value="Entrar" ; return true;" />
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <a href=@Url.Action("Index", "Informacoes")>
+                                <input type="button" class="btn btn-primary" value="Entrar" />
+                            </a>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="~/Scripts/meiomask.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#txtCEP").setMask("cep");
+        });
+        
+    </script>
 </body>
 </html>
