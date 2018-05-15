@@ -24,27 +24,27 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-offset-3 col-md-6" id="camposLogin">
+            <div class="col-md-offset-3 col-md-5" id="camposLogin">
                 <form action="@Url.Action("Entrar", "Login")" class="form-horizontal">
                     <div class="form-group">
-                        <div class="col-md-8">
-                          <h3>LOGIN</h3>
+                        <div class="col-md-12">
+                          <h3 class="text-center">LOGIN</h3>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             @Html.LabelFor(m => m.Email, "E-mail :", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "gustavo_roberto15@hotmail.com" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "EX. exemplo@hotmail.com" })
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             @Html.LabelFor(m => m.Senha, "Senha:", new { @class = "control-label text-center" })
                             @Html.PasswordFor(m => m.Senha, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-8 text-right">
+                        <div class="col-md-12 text-right">
                             <a href=@Url.Action("Index", "Inicio")>
                                 <input type="button" class="btn btn-primary" value="Voltar" />
                             </a>
