@@ -169,6 +169,7 @@
     <Content Include="Content\Cadastro.css" />
     <Content Include="Content\Inicio.css" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\TelaCardapio.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
