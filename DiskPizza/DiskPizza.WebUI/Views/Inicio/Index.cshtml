@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="@Url.Content("~/Content/Inicio.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />    
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -39,16 +39,20 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             @Html.LabelFor(m => m.Cep, "CEP", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Cep, new {@id = "txtCEP", @class = "form-control", @placeholder = "EX. 00000-000" })
+                            @Html.TextBoxFor(m => m.Cep, new { @id = "txtCEP", @class = "form-control", @placeholder = "EX. 00000-000" })
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <br />
+                            <a href="#" class="lnkEndereco">
+                                <input type="button" class="btn btn-primary" value="Buscar" />
+                            </a>
                         </div>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group" style="display:none;" id="endereco">
                         <div class="col-md-9">
                             @*Deve ser colocado a rua automaticamente quando for pesquisado o cep*@
-
-
                             @Html.LabelFor(m => m.Rua, "Rua:", new { @class = "control-label text-center" })
                             @Html.TextBoxFor(m => m.Rua, new { @class = "form-control" })
                         </div>
@@ -57,7 +61,7 @@
                             @Html.TextBoxFor(m => m.NumeroL, new { @class = "form-control", @placeholder = "EX. 00" })
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="buttonEntrar" style="display:none">
                         <div class="col-md-12 text-right">
                             <a href=@Url.Action("Index", "Informacoes")>
                                 <input type="button" class="btn btn-primary" value="Entrar" />
@@ -73,7 +77,11 @@
         $(document).ready(function () {
             $("#txtCEP").setMask("cep");
         });
-        
-    </script>
+
+        $("a.lnkEndereco").click(function () {
+            $("#endereco").show();
+            $("#buttonEntrar").show();
+        });
+    </script>   
 </body>
 </html>
