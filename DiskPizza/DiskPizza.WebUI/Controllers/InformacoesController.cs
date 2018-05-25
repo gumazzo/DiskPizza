@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiskPizza.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace DiskPizza.WebUI.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var lista = new Prod_x_TamanhoDAO().BuscarTodos();
+            return View( lista);
         }
     }
 }
