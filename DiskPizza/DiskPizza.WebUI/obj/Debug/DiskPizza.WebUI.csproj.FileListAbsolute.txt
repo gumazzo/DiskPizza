@@ -166,3 +166,7 @@ C:\Users\Aluno\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.WebUI\bin\Newtonso
 C:\Users\Aluno\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.WebUI\obj\Debug\DiskPizza.WebUI.csprojResolveAssemblyReference.cache
 C:\Users\Aluno\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.WebUI\obj\Debug\DiskPizza.WebUI.dll
 C:\Users\Aluno\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.WebUI\obj\Debug\DiskPizza.WebUI.pdb
+C:\Users\Aluno\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.WebUI\bin\MoreLinq.dll
+C:\Users\Aluno\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.WebUI\bin\System.ValueTuple.dll
+C:\Users\Aluno\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.WebUI\bin\MoreLinq.xml
+C:\Users\Aluno\Documents\GitHub\DiskPizza\DiskPizza\DiskPizza.WebUI\bin\System.ValueTuple.xml

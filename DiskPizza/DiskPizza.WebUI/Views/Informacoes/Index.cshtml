@@ -1,4 +1,5 @@
 ﻿@using DiskPizza.Models
+@using MoreLinq;
 @model List<Produto_x_Tamanho>
 
 <!DOCTYPE html>
@@ -55,56 +56,131 @@
 
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Doces</a></li>
-                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Tradicionais</a></li>
-                                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Especiais</a></li>
+                                        <li role="presentation" class="active">
+                                            <a href="#tradicional" aria-controls="tradicional" role="tab" data-toggle="tab">Tradicionais</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#especial" aria-controls="especial" role="tab" data-toggle="tab">Especiais</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#doces" aria-controls="doces" role="tab" data-toggle="tab">Doces</a>
+                                        </li>
                                     </ul>
 
                                     <!-- Tab panes -->
                                     <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane active" id="home">
-                                            @* Colocar uma tabela com select aqui, mas nao sei como *@
+                                        <div role="tabpanel" class="tab-pane active" id="tradicional">
                                             <table class="table table-striped">
                                                 <thead>
-                                                    @foreach (Produto_x_Tamanho item in Model)
-                                                    {
-                                                        <tr>                                                           
-                                                            <th>
-                                                                @if (@item.Tamanho.Id == 1)
-                                                                {
-                                                                    @item.Tamanho.Nome
-                                                                }
-                                                            </th>
-                                                            <th>
-                                                                @if (@item.Tamanho.Id == 2)
-                                                                {
-                                                                    @item.Tamanho.Nome
-                                                                }
-                                                            </th>
-                                                            <th>
-                                                                @if (@item.Tamanho.Id == 3)
-                                                                {
-                                                                    @item.Tamanho.Nome
-                                                                }
-                                                            </th>
-                                                            <th>
-                                                                @if (@item.Tamanho.Id == 4)
-                                                                {
-                                                                    @item.Tamanho.Nome
-                                                                }
-                                                            </th>                                                            
-                                                        </tr>
-                                                    }
+                                                    <tr>
+                                                        <td>PRODUTO</td>
+                                                        @foreach (Tamanho tamanho in (List<Tamanho>)ViewBag.Tamanhos)
+                                                        {
+                                                            <td>
+                                                                @tamanho.Nome.ToUpper()
+                                                            </td>
+                                                        }
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach (Produto_x_Tamanho item in Model)
+                                                    @foreach (Produto produto in Model.Select(o => o.Produto).Where(o => o.Tipo == "Tradicional").DistinctBy(o => o.Id))
                                                     {
                                                         <tr>
-                                                            <td>@item.Produto.Nome</td>
-                                                            <td>@item.Produto.Preco</td>
-                                                            <td>@item.Produto.Preco</td>
-                                                            <td>@item.Produto.Preco</td>
-                                                            <td>@item.Produto.Preco</td>
+                                                            <td>
+                                                                @produto.Nome
+                                                            </td>
+                                                            @foreach (Tamanho tamanho in (List<Tamanho>)ViewBag.Tamanhos)
+                                                            {
+                                                                var tXp = Model.FirstOrDefault(o => o.Produto.Id == produto.Id && o.Tamanho.Id == tamanho.Id);
+                                                                if (tXp != null)
+                                                                {
+                                                                    <td>@tXp.Preco_Total</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td>
+                                                                        @decimal.Zero
+                                                                    </td>
+                                                                }
+                                                            }
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="especial">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <td>PRODUTO</td>
+                                                        @foreach (Tamanho tamanho in (List<Tamanho>)ViewBag.Tamanhos)
+                                                        {
+                                                            <td>
+                                                                @tamanho.Nome.ToUpper()
+                                                            </td>
+                                                        }
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (Produto produto in Model.Select(o => o.Produto).Where(o => o.Tipo == "Especial").DistinctBy(o => o.Id))
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @produto.Nome
+                                                            </td>
+                                                            @foreach (Tamanho tamanho in (List<Tamanho>)ViewBag.Tamanhos)
+                                                            {
+                                                                var tXp = Model.FirstOrDefault(o => o.Produto.Id == produto.Id && o.Tamanho.Id == tamanho.Id);
+                                                                if (tXp != null)
+                                                                {
+                                                                    <td>@tXp.Preco_Total</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td>
+                                                                        @decimal.Zero
+                                                                    </td>
+                                                                }
+                                                            }
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="doces">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <td>PRODUTO</td>
+                                                        @foreach (Tamanho tamanho in (List<Tamanho>)ViewBag.Tamanhos)
+                                                        {
+                                                            <td>
+                                                                @tamanho.Nome.ToUpper()
+                                                            </td>
+                                                        }
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (Produto produto in Model.Select(o => o.Produto).Where(o => o.Tipo == "Doce").DistinctBy(o => o.Id))
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @produto.Nome
+                                                            </td>
+                                                            @foreach (Tamanho tamanho in (List<Tamanho>)ViewBag.Tamanhos)
+                                                            {
+                                                                var tXp = Model.FirstOrDefault(o => o.Produto.Id == produto.Id && o.Tamanho.Id == tamanho.Id);
+                                                                if (tXp != null)
+                                                                {
+                                                                    <td>@tXp.Preco_Total</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td>
+                                                                        @decimal.Zero
+                                                                    </td>
+                                                                }
+                                                            }
                                                         </tr>
                                                     }
                                                 </tbody>

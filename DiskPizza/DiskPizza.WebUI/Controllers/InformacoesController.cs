@@ -12,8 +12,9 @@ namespace DiskPizza.WebUI.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Tamanhos = new TamanhoDAO().BuscarTodos();
             var lista = new Prod_x_TamanhoDAO().BuscarTodos();
-            return View( lista);
+            return View(lista);
         }
     }
 }

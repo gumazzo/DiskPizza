@@ -20,14 +20,15 @@ namespace DiskPizza.DataAccess
                                     Integrated Security=SSPI;"))
             {
                 //Criando instrução sql para inserir na tabela de estados
-                string strSQL = @"INSERT INTO TB_USUARIO(ST_NOME, ST_TELEFONE, ST_EMAIL,ST_CPF,ST_SENHA, DT_ADMINISTRADOR)
-                                    VALUES (@ST_NOME, @ST_TELEFONE,@ST_EMAIL,@ST_CPF,@ST_SENHA,@DT_ADMINISTRADOR);";
+                string strSQL = @"INSERT INTO TB_USUARIO( ST_NOME, ST_TELEFONE, ST_EMAIL,ST_CPF,ST_SENHA, DT_ADMINISTRADOR)
+                                    VALUES ( @ST_NOME, @ST_TELEFONE,@ST_EMAIL,@ST_CPF,@ST_SENHA,@DT_ADMINISTRADOR);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
                     //Preenchendo os parâmetros da instrução sql
+                    //cmd.Parameters.Add("@ID_USUARIO", SqlDbType.Int).Value = obj.Id;
                     cmd.Parameters.Add("@ST_NOME", SqlDbType.VarChar).Value = obj.Nome;
                     cmd.Parameters.Add("@ST_TELEFONE", SqlDbType.VarChar).Value = obj.Telefone;
                     cmd.Parameters.Add("@ST_EMAIL", SqlDbType.VarChar).Value = obj.Email;
