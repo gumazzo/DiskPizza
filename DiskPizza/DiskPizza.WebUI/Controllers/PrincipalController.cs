@@ -1,4 +1,5 @@
 ﻿using DiskPizza.DataAccess;
+using DiskPizza.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,11 @@ namespace DiskPizza.WebUI.Controllers
         {
             ViewBag.Tipos = new ProdutoDAO().BuscarTodos().Select(o => o.Tipo).Distinct().ToList();
             ViewBag.Pizzas = new ProdutoDAO().BuscarTodos();
+            return View();
+        }
+
+        public ActionResult AdicionarItem(Produto_x_Tamanho obj)
+        {
             return View();
         }
     }

@@ -33,11 +33,17 @@ namespace DiskPizza.DataAccess
                     cmd.Parameters.Add("@QNT_SABORES", SqlDbType.Int).Value = obj.Qtd_sabores;
                     cmd.Parameters.Add("@ST_STATUS", SqlDbType.VarChar).Value = obj.Status;
                     cmd.Parameters.Add("@ID_USUARIO", SqlDbType.Int).Value = obj.Usuario.Id;
-                    cmd.Parameters.Add("@ST_CEP", SqlDbType.VarChar).Value = obj.Cep ?? string.Empty;
-                    cmd.Parameters.Add("@ST_RUA", SqlDbType.VarChar).Value = obj.Rua ?? string.Empty;
-                    cmd.Parameters.Add("@ST_NUMEROLOCAL", SqlDbType.VarChar).Value = obj.NumeroL ?? string.Empty;
+                    cmd.Parameters.Add("@ST_CEP", SqlDbType.VarChar).Value = obj.Cep;
+                    cmd.Parameters.Add("@ST_RUA", SqlDbType.VarChar).Value = obj.Rua;
+                    cmd.Parameters.Add("@ST_NUMEROLOCAL", SqlDbType.VarChar).Value = obj.NumeroL;
 
-
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
                     //Abrindo conexão com o banco de dados
                     conn.Open();

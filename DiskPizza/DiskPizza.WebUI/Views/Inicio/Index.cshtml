@@ -32,7 +32,7 @@
         </div>
         <div class="row">
             <div class="col-md-offset-3 col-md-5" id="camposInicio">
-                <form class="form-horizontal">
+                <form class="form-horizontal" action="@Url.Action("Index", "Informacoes")">
                     <div class="form-group">
                         <div class="col-md-12">
                             <h3 class="text-center">COMO TE ENCONTRAR?</h3>
@@ -63,9 +63,7 @@
                     </div>
                     <div class="form-group" id="buttonEntrar" style="display:none">
                         <div class="col-md-12 text-right">
-                            <a href=@Url.Action("Index", "Informacoes")>
-                                <input type="button" class="btn btn-primary" value="Entrar" />
-                            </a>
+                            <button type="submit" class="btn btn-primary">Entrar</button>
                         </div>
                     </div>
                 </form>
@@ -84,7 +82,7 @@
                 // Limpa valores do formulário de cep.
                 $("#txtRua").val("");
                 $("#txtNumero").val("");
-                
+
             }
 
             //Quando o campo cep perde o foco.
@@ -111,7 +109,7 @@
                             if (!("erro" in dados)) {
                                 //Atualiza os campos com os valores da consulta.
                                 $("#txtRua").val(dados.logradouro);
-                                
+
                             } //end if.
                             else {
                                 //CEP pesquisado não foi encontrado.
@@ -133,10 +131,10 @@
             });
         });
 
-    $("a.lnkEndereco").click(function () {
-    $("#endereco").show();
-    $("#buttonEntrar").show();
-    });
+        $("a.lnkEndereco").click(function () {
+            $("#endereco").show();
+            $("#buttonEntrar").show();
+        });
     </script>
 </body>
 </html>

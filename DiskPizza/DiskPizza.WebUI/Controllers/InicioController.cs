@@ -9,10 +9,9 @@ using System.Web.Script.Serialization;
 
 namespace DiskPizza.WebUI.Controllers
 {
+    [Authorize]
     public class InicioController : Controller
     {
-        // GET: Inicio
-
         public ActionResult Index()
         {
             return View();

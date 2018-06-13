@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-12">
                 <form class="form-horizontal">
-                   
+
                     <div class="form-group">
                         <div class="col-md-2">
                             <img src="~/Imagens/pizza.jpg" alt="" class="img-thumbnail">
@@ -72,10 +72,11 @@
                     </div>
 
                     <div id="cardapio" class="form-group" style="display: none;">
-                        <div class="col-md-12">
-                            @* Colocar uma tabela aqui, mas nao sei como *@
-                            @foreach (var tipo in (List<String>)ViewBag.Tipos)
-                            {
+
+                        @* Colocar uma tabela aqui, mas nao sei como *@
+                        @foreach (var tipo in (List<String>)ViewBag.Tipos)
+                        {
+                            <div class="col-md-4">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -96,8 +97,8 @@
                                         }
                                     </tbody>
                                 </table>
-                            }
-                        </div>
+                            </div>
+                        }
                     </div>
 
                     <hr />
@@ -132,7 +133,7 @@
                     <div class="form-group">
                         <div class="col-md-12 text-right">
                             <a href=@Url.Action("Index", "Pagamento")>
-                                <input type="button" class="btn btn-primary" value="Pagar" ; return true;" />
+                                <input type="button" class="btn btn-primary" value="Finalizar e ir para pagamento" ; return true;" />
                             </a>
                         </div>
                     </div>
