@@ -203,9 +203,18 @@
             $('[id^=sabor]').change(function () {
                 $("#cardapio").show();
             });
-
+            //AJAX TEM QUE SER REVISAO PARA SER COLOCADO DE FORMA CORRETA
             $("a.lnkAdd").click(function () {
                 $("#pedido").show();
+                var url = '@Url.Action("NomeMetodo", "NomeController")';
+                /*$.ajax({
+                    type:"POST",
+                    data:{'idProd': idProd},
+                    url:url,
+                    success:function(data){
+                        $('#resultItem').html(data);
+                    }
+                })*/
             });
         });
     </script>
