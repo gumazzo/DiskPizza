@@ -1,5 +1,5 @@
 ﻿@using DiskPizza.Models
-@model Pedido
+@model Usuario
 @{
     Layout = "";
 }
@@ -10,66 +10,72 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="@Url.Content("~/Content/Inicio.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/inicio.css")" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></snoicript>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <div class="form-group" id="Links">
-                <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-12 text-right" style="color: #ffffff !important;">
                     <a href="@Url.Action("Index", "Cadastro")">Cadastrar</a> | <a href="@Url.Action("Index", "Login")">Logar</a>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-offset-3 col-md-5" id="camposInicio">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <h3 class="text-center">COMO TE ENCONTRAR?</h3>
+    </div>
+    <div class="vertical-center">
+        <div class="container">
+            <div class="row">
+                <div id="camposInicio" class="col-md-6 col-md-offset-3">
+                    <form action="@Url.Action("SalvarCep", "Inicio")" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h3 class="text-center">COMO TE ENCONTRAR?</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-9">
-                            @Html.LabelFor(m => m.Cep, "CEP", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Cep, new { @id = "txtCEP", @class = "form-control", @placeholder = "EX. 00000-000" })
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.LabelFor(m => m.Cep, "CEP", new { @class = "control-label" })
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Cep, new { @id = "txtCEP", @class = "form-control", @placeholder = "Ex.:00000-000" })
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary lnkEndereco" type="button">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                            Buscar
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-3 text-right">
-                            <br />
-                            <a href="#" class="lnkEndereco">
-                                <input type="button" class="btn btn-primary" value="Buscar" />
-                            </a>
+                        <div class="form-group" id="endereco" style="display: none;">
+                            <div class="col-md-9">
+                                @Html.LabelFor(m => m.Rua, "Rua:", new { @class = "control-label text-center" })
+                                @Html.TextBoxFor(m => m.Rua, new { @id = "txtRua", @class = "form-control" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.LabelFor(m => m.Numero, "Número:", new { @class = "control-label text-center" })
+                                @Html.TextBoxFor(m => m.Numero, new { @id = "txtNumero", @class = "form-control", @placeholder = "Ex.:0000" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group" id="endereco" style="display: none;">
-                        <div class="col-md-9">
-                            @Html.LabelFor(m => m.Rua, "Rua:", new { @class = "control-label text-center" })
-                            @Html.TextBoxFor(m => m.Rua, new { @id = "txtRua", @class = "form-control" })
+                        <div class="form-group" id="buttonEntrar" style="display: none;">
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="btn btn-primary" href="">Entrar</button>
+                            </div>
                         </div>
-                        <div class="col-md-3">
-                            @Html.LabelFor(m => m.NumeroL, "Número:", new { @class = "control-label text-center" })
-                            @Html.TextBoxFor(m => m.NumeroL, new { @id = "txtNumero", @class = "form-control", @placeholder = "EX. 000" })
-                        </div>
-                    </div>
-                    <div class="form-group" id="buttonEntrar" style="display: none;">
-                        <div class="col-md-12 text-right">
-                            <a class="btn btn-primary" href="@Url.Action("Index", "Informacoes")">Entrar</a>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <script src="~/Scripts/meiomask.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Scripts/meiomask.js")"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#txtCEP").setMask("cep");
@@ -127,7 +133,7 @@
             });
         });
 
-        $("a.lnkEndereco").click(function () {
+        $("button.lnkEndereco").click(function () {
             $("#endereco").show();
             $("#buttonEntrar").show();
         });

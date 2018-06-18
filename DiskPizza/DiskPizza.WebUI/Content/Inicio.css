@@ -1,39 +1,21 @@
 ﻿body {
     background-image: url('../Imagens/pizza2.jpg');
     background-size: cover;
+    height: 100%;
     padding: 0;
     margin: 0;
 }
 
-.container {
-    padding: 25px;
-    position: center;
-}
-
-#Links {
-    text-align: right;
+.vertical-center {
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 #camposInicio {
-    margin-top: 300px;
     color: white;
     background: rgba(0,0,0,.7);
     border: none;
-    margin-bottom: 1.25rem;
     border-width: 1px;
-    padding: 1.25rem;
-}
-
-.button {
-    display: inline-block;
-    padding: 15px 25px;
-    font-size: 24px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: #fff;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 15px;
 }

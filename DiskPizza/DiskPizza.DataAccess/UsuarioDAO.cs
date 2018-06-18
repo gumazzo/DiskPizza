@@ -87,6 +87,53 @@ namespace DiskPizza.DataAccess
             }
         }
 
+        public Usuario BuscarPorId(int usuarioId)
+        {
+            //Criando uma conexão com o banco de dados
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                //Criando instrução sql para selecionar todos os registros na tabela de estados
+                string strSQL = @"SELECT * FROM TB_USUARIO WHERE ID_USUARIO = @ID_USUARIO;";
+
+                //Criando um comando sql que será executado na base d edados
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    //Abrindo conexão com o banco de dados
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@ID_USUARIO", SqlDbType.Int).Value = usuarioId;
+                    cmd.CommandText = strSQL;
+                    //Executando instrução sql
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+                    //Fechando conexão com o banco de dados
+                    conn.Close();
+
+                    if (!(dt != null && dt.Rows.Count > 0))
+                        return null;
+
+                    //Perconrrendo todos os registros encontrados na base de dados e adicionando em uma lista
+                    var row = dt.Rows[0];
+                    var usuario = new Usuario()
+                    {
+                        Id = Convert.ToInt32(row["ID_USUARIO"]),
+                        Nome = row["ST_NOME"].ToString(),
+                        Telefone = row["ST_TELEFONE"].ToString(),
+                        Email = row["ST_EMAIL"].ToString(),
+                        Cpf = row["ST_CPF"].ToString(),
+                        Senha = row["ST_SENHA"].ToString(),
+                        Administrador = Convert.ToBoolean(row["DT_ADMINISTRADOR"]),
+                        Cep = row["ST_CEP"].ToString(),
+                        Rua = row["ST_RUA"].ToString(),
+                        Numero = row["ST_NUMEROLOCAL"].ToString()
+                    };
+
+                    return usuario;
+                }
+            }
+        }
+
         public List<Usuario> BuscarTodos()
         {
             var lst = new List<Usuario>();

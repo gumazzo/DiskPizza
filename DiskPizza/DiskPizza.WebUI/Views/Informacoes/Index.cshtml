@@ -72,11 +72,13 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <td>PRODUTO</td>
+                                                        <td>
+                                                            <b>PRODUTO</b>
+                                                        </td>
                                                         @foreach (Tamanho tamanho in (List<Tamanho>)ViewBag.Tamanhos)
                                                         {
                                                             <td>
-                                                                @tamanho.Nome.ToUpper()
+                                                                <b>@tamanho.Nome.ToUpper()</b>
                                                             </td>
                                                         }
                                                     </tr>
