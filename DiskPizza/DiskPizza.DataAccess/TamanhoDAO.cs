@@ -1,11 +1,9 @@
-﻿using System;
+﻿using DiskPizza.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiskPizza.Models;
-using System.Data.SqlClient;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DiskPizza.DataAccess
 {
@@ -14,14 +12,10 @@ namespace DiskPizza.DataAccess
         public void Inserir(Tamanho obj)
         {
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn =
-                new SqlConnection(@"Initial Catalog=TAKEPIZZA;
-                                    Data Source=localhost;
-                                    Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para inserir na tabela de estados
-                string strSQL = @"INSERT INTO TB_TAMANHO(ST_NOME)
-                                    VALUES (@ST_NOME);";
+                string strSQL = @"INSERT INTO TB_TAMANHO (ST_NOME) VALUES (@ST_NOME);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -45,10 +39,7 @@ namespace DiskPizza.DataAccess
             var lst = new List<Tamanho>();
 
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn =
-                new SqlConnection(@"Initial Catalog=TAKEPIZZA;
-                                    Data Source=localhost;
-                                    Integrated Security=SSPI"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para selecionar todos os registros na tabela de estados
                 string strSQL = @"SELECT * FROM TB_TAMANHO;";
@@ -80,6 +71,7 @@ namespace DiskPizza.DataAccess
                     }
                 }
             }
+
             return lst;
         }
     }

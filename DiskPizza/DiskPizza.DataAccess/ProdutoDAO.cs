@@ -1,11 +1,9 @@
-﻿using System;
+﻿using DiskPizza.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiskPizza.Models;
-using System.Data.SqlClient;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DiskPizza.DataAccess
 {
@@ -14,14 +12,10 @@ namespace DiskPizza.DataAccess
         public void Inserir(Produto obj)
         {
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn =
-                new SqlConnection(@"Initial Catalog=TAKEPIZZA;
-                                    Data Source=localhost;
-                                    Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para inserir na tabela de estados
-                string strSQL = @"INSERT INTO TB_PRODUTO ( ST_NOME, ST_TIPO, DT_PRECO)
-                                    VALUES ( @ST_NOME, @ST_TIPO, @DT_PRECO);";
+                string strSQL = @"INSERT INTO TB_PRODUTO (ST_NOME, ST_TIPO) VALUES (@ST_NOME, @ST_TIPO);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -30,8 +24,6 @@ namespace DiskPizza.DataAccess
                     //Preenchendo os parâmetros da instrução sql
                     cmd.Parameters.Add("@ST_NOME", SqlDbType.VarChar).Value = obj.Nome;
                     cmd.Parameters.Add("@ST_TIPO", SqlDbType.VarChar).Value = obj.Tipo;
-                    cmd.Parameters.Add("@DT_PRECO", SqlDbType.Decimal).Value = obj.Preco;
-                    
 
                     //Abrindo conexão com o banco de dados
                     conn.Open();
@@ -48,10 +40,7 @@ namespace DiskPizza.DataAccess
             var lst = new List<Produto>();
 
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn =
-                new SqlConnection(@"Initial Catalog=TAKEPIZZA;
-                                    Data Source=localhost;
-                                    Integrated Security=SSPI"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para selecionar todos os registros na tabela de estados
                 string strSQL = @"SELECT * FROM TB_PRODUTO;";
@@ -77,8 +66,7 @@ namespace DiskPizza.DataAccess
                         {
                             Id = Convert.ToInt32(row["ID_PRODUTO"]),
                             Nome = row["ST_NOME"].ToString(),
-                            Tipo = row["ST_TIPO"].ToString(),
-                            Preco = Convert.ToDecimal(row["DT_PRECO"])
+                            Tipo = row["ST_TIPO"].ToString()
                         };
 
                         lst.Add(produto);

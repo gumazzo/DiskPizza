@@ -1,11 +1,9 @@
-﻿using System;
+﻿using DiskPizza.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiskPizza.Models;
-using System.Data.SqlClient;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DiskPizza.DataAccess
 {
@@ -14,14 +12,11 @@ namespace DiskPizza.DataAccess
         public void Inserir(Produto_x_Tamanho obj)
         {
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn =
-                new SqlConnection(@"Initial Catalog=TAKEPIZZA;
-                                    Data Source=localhost;
-                                    Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para inserir na tabela de estados
                 string strSQL = @"INSERT INTO TB_PRODUTO_X_TAMANHO( DT_PRECO_TOTAL, ID_PRODUTO, ID_TAMANHO)
-                                    VALUES ( @DT_PRECO_TOTAL, @ID_PRODUTO, @ID_TAMANHO);";
+                                  VALUES ( @DT_PRECO_TOTAL, @ID_PRODUTO, @ID_TAMANHO);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -47,21 +42,17 @@ namespace DiskPizza.DataAccess
             var lst = new List<Produto_x_Tamanho>();
 
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn =
-                new SqlConnection(@"Initial Catalog=TAKEPIZZA;
-                                    Data Source=localhost;
-                                    Integrated Security=SSPI"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para selecionar todos os registros na tabela de estados
                 string strSQL = @"SELECT 
-                                    pt.*, 
-                                    p.ST_NOME AS NOME_PRODUTO,  
-                                    p.ST_TIPO AS TIPO_PRODUTO, 
-                                    p.DT_PRECO AS PRECO_PRODUTO,
-                                    t.ST_NOME AS TAMANHO_NOME
-                                FROM TB_PRODUTO_X_TAMANHO pt
-                                INNER JOIN TB_PRODUTO p ON (p.ID_PRODUTO = pt.ID_PRODUTO)
-                                INNER JOIN TB_TAMANHO t ON (t.ID_TAMANHO = pt.ID_TAMANHO);";
+                                      pt.*, 
+                                      p.ST_NOME AS NOME_PRODUTO,  
+                                      p.ST_TIPO AS TIPO_PRODUTO, 
+                                      t.ST_NOME AS TAMANHO_NOME
+                                  FROM TB_PRODUTO_X_TAMANHO pt
+                                  INNER JOIN TB_PRODUTO p ON (p.ID_PRODUTO = pt.ID_PRODUTO)
+                                  INNER JOIN TB_TAMANHO t ON (t.ID_TAMANHO = pt.ID_TAMANHO);";
 
                 //Criando um comando sql que será executado na base d edados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -88,8 +79,7 @@ namespace DiskPizza.DataAccess
                             {
                                 Id = Convert.ToInt32(row["ID_PRODUTO"]),
                                 Nome = row["NOME_PRODUTO"].ToString(),
-                                Tipo = row["TIPO_PRODUTO"].ToString(),
-                                Preco = Convert.ToDecimal(row["PRECO_PRODUTO"])
+                                Tipo = row["TIPO_PRODUTO"].ToString()
                             },
                             Tamanho = new Tamanho()
                             {

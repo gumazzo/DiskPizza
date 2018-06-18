@@ -1,11 +1,9 @@
-﻿using System;
+﻿using DiskPizza.Models;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiskPizza.Models;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DiskPizza.DataAccess
 {
@@ -14,10 +12,7 @@ namespace DiskPizza.DataAccess
         public void Inserir(Item_Pedido obj)
         {
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn =
-                new SqlConnection(@"Initial Catalog=TAKEPIZZA;
-                                    Data Source=localhost;
-                                    Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para inserir na tabela de estados
                 string strSQL = @"INSERT INTO TB_ITEM_PEDIDO(ID_PEDIDO, ID_PRODXTAMANHO, PRECO_ITEM)
@@ -47,10 +42,7 @@ namespace DiskPizza.DataAccess
             var lst = new List<Item_Pedido>();
 
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn =
-                new SqlConnection(@"Initial Catalog=TAKEPIZZA;
-                                    Data Source=localhost;
-                                    Integrated Security=SSPI"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para selecionar todos os registros na tabela de estados
                 string strSQL = @"SELECT 

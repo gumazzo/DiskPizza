@@ -1,34 +1,28 @@
-﻿using System;
+﻿using DiskPizza.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiskPizza.Models;
-using System.Data.SqlClient;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DiskPizza.DataAccess
 {
-    public class InicioDAO
+    public class UsuarioDAO
     {
         public void Inserir(Usuario obj)
         {
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn =
-                new SqlConnection(@"Initial Catalog=TAKEPIZZA;
-                                    Data Source=localhost;
-                                    Integrated Security=SSPI;"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para inserir na tabela de estados
-                string strSQL = @"INSERT INTO TB_USUARIO( ST_NOME, ST_TELEFONE, ST_EMAIL,ST_CPF,ST_SENHA, DT_ADMINISTRADOR)
-                                    VALUES ( @ST_NOME, @ST_TELEFONE,@ST_EMAIL,@ST_CPF,@ST_SENHA,@DT_ADMINISTRADOR);";
+                string strSQL = @"INSERT INTO TB_USUARIO (ST_NOME, ST_TELEFONE, ST_EMAIL, ST_CPF, ST_SENHA, DT_ADMINISTRADOR)
+                                  VALUES (@ST_NOME, @ST_TELEFONE, @ST_EMAIL, @ST_CPF, @ST_SENHA, @DT_ADMINISTRADOR);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
                     //Preenchendo os parâmetros da instrução sql
-                    //cmd.Parameters.Add("@ID_USUARIO", SqlDbType.Int).Value = obj.Id;
                     cmd.Parameters.Add("@ST_NOME", SqlDbType.VarChar).Value = obj.Nome;
                     cmd.Parameters.Add("@ST_TELEFONE", SqlDbType.VarChar).Value = obj.Telefone;
                     cmd.Parameters.Add("@ST_EMAIL", SqlDbType.VarChar).Value = obj.Email;
@@ -51,10 +45,7 @@ namespace DiskPizza.DataAccess
             var lst = new List<Usuario>();
 
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn =
-                new SqlConnection(@"Initial Catalog=TAKEPIZZA;
-                                    Data Source=localhost;
-                                    Integrated Security=SSPI"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para selecionar todos os registros na tabela de estados
                 string strSQL = @"SELECT * FROM TB_USUARIO;";
@@ -97,7 +88,7 @@ namespace DiskPizza.DataAccess
         public Usuario Logar(Usuario obj)
         {
             //Criando uma conexão com o banco de dados
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=TAKEPIZZA; Data Source=localhost; Integrated Security=SSPI"))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para selecionar todos os registros na tabela de estados
                 string strSQL = @"SELECT TOP 1 * FROM TB_USUARIO WHERE ST_EMAIL = @ST_EMAIL AND ST_SENHA = @ST_SENHA;";

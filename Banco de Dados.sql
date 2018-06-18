@@ -1,5 +1,8 @@
-CREATE DATABASE TAKEPIZZA;
-USE TAKEPIZZA;
+CREATE DATABASE TAKEPIZZA
+GO
+
+USE TAKEPIZZA
+GO
 
 CREATE TABLE TB_USUARIO(
 	ID_USUARIO		 INTEGER IDENTITY(1,1) PRIMARY KEY,
@@ -17,16 +20,11 @@ CREATE TABLE TB_PRODUTO(
 	ST_TIPO			 VARCHAR(30)
 )
 
-select * from TB_PRODUTO;
-
---delete from TB_PRODUTO_X_TAMANHO
---delete from TB_PRODUTO
-
-insert into TB_PRODUTO values
-('Strogonoff', 'Especial', 10.00),
-('Calabresa', 'Tradicional', 10.00),
-('Camarão', 'Especial', 10.00),
-('Chocolate', 'Doce', 10.00);
+INSERT INTO TB_PRODUTO VALUES
+('Strogonoff', 'Especial'),
+('Calabresa', 'Tradicional'),
+('Camarão', 'Especial'),
+('Chocolate', 'Doce');
 
 CREATE TABLE TB_TAMANHO(
 	ID_TAMANHO	 INTEGER IDENTITY(1,1) PRIMARY KEY,
@@ -34,10 +32,10 @@ CREATE TABLE TB_TAMANHO(
 )
 
 insert into TB_TAMANHO values
-('pequeno'),
-('medio'),
-('grande'),
-('gigante')
+('PEQUENO'),
+('MÉDIO'),
+('GRANDE'),
+('GIGANTE');
 
 CREATE TABLE TB_PRODUTO_X_TAMANHO(
 	ID_PRODXTAMANHO	 INTEGER IDENTITY(1,1) PRIMARY KEY,
@@ -46,26 +44,40 @@ CREATE TABLE TB_PRODUTO_X_TAMANHO(
 	ID_TAMANHO		 INTEGER REFERENCES TB_TAMANHO
 )
 
-insert into TB_PRODUTO_X_TAMANHO values
-(11.00, 14, 1),
-(12.00, 14, 2),
-(13.00, 14, 3),
-(14.00, 14, 4),
+DELETE FROM TB_PRODUTO_X_TAMANHO;
 
-(21.00, 15, 1),
-(22.00, 15, 2),
-(23.00, 15, 3),
-(24.00, 15, 4),
+DECLARE @ID_PRODUTO int, @ROW_INDEX decimal(15,2) = 0;
 
-(31.00, 16, 1),
-(32.00, 16, 2),
-(33.00, 16, 3),
-(34.00, 16, 4),
+-- Cursor para percorrer os registros
+DECLARE cursor1 CURSOR FOR
+SELECT ID_PRODUTO FROM TB_PRODUTO
+ 
+--Abrindo Cursor
+OPEN cursor1
+ 
+-- Lendo a próxima linha
+FETCH NEXT FROM cursor1 INTO @ID_PRODUTO
+ 
+-- Percorrendo linhas do cursor (enquanto houverem)
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	
+	-- Executando as rotinas desejadas manipulando o registro
+	insert into TB_PRODUTO_X_TAMANHO (DT_PRECO_TOTAL, ID_PRODUTO, ID_TAMANHO) values (cast(11.0 + @ROW_INDEX as decimal(15,2)), @ID_PRODUTO, 1);
+	insert into TB_PRODUTO_X_TAMANHO (DT_PRECO_TOTAL, ID_PRODUTO, ID_TAMANHO) values (cast(12.0 + @ROW_INDEX as decimal(15,2)), @ID_PRODUTO, 2);
+	insert into TB_PRODUTO_X_TAMANHO (DT_PRECO_TOTAL, ID_PRODUTO, ID_TAMANHO) values (cast(13.0 + @ROW_INDEX as decimal(15,2)), @ID_PRODUTO, 3);
+	insert into TB_PRODUTO_X_TAMANHO (DT_PRECO_TOTAL, ID_PRODUTO, ID_TAMANHO) values (cast(14.0 + @ROW_INDEX as decimal(15,2)), @ID_PRODUTO, 4);
+	SET @ROW_INDEX = @ROW_INDEX + 10.0;
 
-(41.00, 17, 1),
-(42.00, 17, 2),
-(43.00, 17, 3),
-(44.00, 17, 4);
+-- Lendo a próxima linha
+FETCH NEXT FROM cursor1 INTO @ID_PRODUTO
+END
+ 
+-- Fechando Cursor para leitura
+CLOSE cursor1
+ 
+-- Finalizado o cursor
+DEALLOCATE cursor1
 
 CREATE TABLE TB_PEDIDO(
 	ID_PEDIDO	 INTEGER IDENTITY(1,1) PRIMARY KEY,

@@ -18,7 +18,7 @@ namespace DiskPizza.WebUI.Controllers
 
         public ActionResult Entrar(Usuario obj)
         {
-            var usuarioLogado = new InicioDAO().Logar(obj);
+            var usuarioLogado = new UsuarioDAO().Logar(obj);
 
             if (usuarioLogado == null)
             {
