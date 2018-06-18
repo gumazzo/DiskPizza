@@ -23,7 +23,6 @@
         <div class="row">
             <div class="col-md-12">
                 <form class="form-horizontal">
-
                     <div class="form-group">
                         <div class="col-md-2">
                             <img src="~/Imagens/pizza.jpg" alt="" class="img-thumbnail">
@@ -31,26 +30,31 @@
                         <div class="col-md-10">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <label>Pizza Hut</label>
+                                    <label>NOME DA PIZZARIA</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Distância: </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Tempo de entrega: </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Taxa de entrega:</label>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label>Distancia: </label>
-                                <label>Tempo de entrega: </label>
-                                <label>Taxa de entrega:</label>
-                            </div>
-                        </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-12">
                             <h3>Meu pedido</h3>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-12">
                             <label class="control-label">Tamanho:</label>
@@ -60,7 +64,6 @@
                             <input id="gigante" type="radio" name="tamanho" /> Gigante
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-12">
                             <label class="control-label">Quantidade de sabores:</label>
@@ -70,10 +73,7 @@
                             <input id="sabor4" type="radio" disabled="disabled" name="sabores" /> 4
                         </div>
                     </div>
-
                     <div id="cardapio" class="form-group" style="display: none;">
-
-                        @* Colocar uma tabela aqui, mas nao sei como *@
                         @foreach (var tipo in (List<String>)ViewBag.Tipos)
                         {
                             <div class="col-md-4">
@@ -100,9 +100,7 @@
                             </div>
                         }
                     </div>
-
                     <hr />
-
                     <div id="pedido" class="form-group" style="display: none;">
                         <div class="col-md-12">
                             <table class="table table-striped">
@@ -126,10 +124,8 @@
                             <div class="col-md-12 text-right">
                                 TOTAL: R$ 100,00
                             </div>
-
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-12 text-right">
                             <a href=@Url.Action("Index", "Pagamento")>
@@ -137,7 +133,6 @@
                             </a>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -203,7 +198,7 @@
             $('[id^=sabor]').change(function () {
                 $("#cardapio").show();
             });
-            //AJAX TEM QUE SER REVISAO PARA SER COLOCADO DE FORMA CORRETA
+
             $("a.lnkAdd").click(function () {
                 $("#pedido").show();
                 var url = '@Url.Action("NomeMetodo", "NomeController")';

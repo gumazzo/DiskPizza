@@ -24,6 +24,14 @@ namespace DiskPizza.DataAccess
                     //Preenchendo os parâmetros da instrução sql
                     cmd.Parameters.Add("@ST_NOME", SqlDbType.VarChar).Value = obj.Nome;
 
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
                     //Abrindo conexão com o banco de dados
                     conn.Open();
                     //Executando instrução sql

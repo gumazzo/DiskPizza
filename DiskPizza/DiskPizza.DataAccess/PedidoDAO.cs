@@ -15,8 +15,8 @@ namespace DiskPizza.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para inserir na tabela de estados
-                string strSQL = @"INSERT INTO TB_PEDIDO( DT_DATA, ST_TAMANHO, QNT_SABORES, ST_STATUS, ID_USUARIO, ST_CEP, ST_RUA, ST_NUMEROLOCAL)
-                                  VALUES ( @DT_DATA, @ST_TAMANHO, @QNT_SABORES, @ST_STATUS, @ID_USUARIO, @ST_CEP, @ST_RUA, @ST_NUMEROLOCAL);";
+                string strSQL = @"INSERT INTO TB_PEDIDO(DT_DATA, ST_TAMANHO, QNT_SABORES, ST_STATUS, ID_USUARIO, ST_CEP, ST_RUA, ST_NUMEROLOCAL)
+                                  VALUES (@DT_DATA, @ST_TAMANHO, @QNT_SABORES, @ST_STATUS, @ID_USUARIO, @ST_CEP, @ST_RUA, @ST_NUMEROLOCAL);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -25,7 +25,7 @@ namespace DiskPizza.DataAccess
                     //Preenchendo os parâmetros da instrução sql
                     cmd.Parameters.Add("@DT_DATA", SqlDbType.DateTime).Value = obj.Data;
                     cmd.Parameters.Add("@ST_TAMANHO", SqlDbType.VarChar).Value = obj.Tamanho;
-                    cmd.Parameters.Add("@QNT_SABORES", SqlDbType.Int).Value = obj.Qtd_sabores;
+                    cmd.Parameters.Add("@QNT_SABORES", SqlDbType.Int).Value = obj.QtdSabores;
                     cmd.Parameters.Add("@ST_STATUS", SqlDbType.VarChar).Value = obj.Status;
                     cmd.Parameters.Add("@ID_USUARIO", SqlDbType.Int).Value = obj.Usuario.Id;
                     cmd.Parameters.Add("@ST_CEP", SqlDbType.VarChar).Value = obj.Cep;
@@ -81,7 +81,7 @@ namespace DiskPizza.DataAccess
                         {
                             Id = Convert.ToInt32(row["ID_PEDIDO"]),
                             Data = Convert.ToDateTime(row["DT_DATA"]),
-                            Qtd_sabores = Convert.ToInt32(row["QNT_SABORES"]),
+                            QtdSabores = Convert.ToInt32(row["QNT_SABORES"]),
                             Status = row["ST_STATUS"].ToString(),
                             Tamanho = row["ST_TAMANHO"].ToString(),
                             Cep = row["ST_CEP"].ToString(),

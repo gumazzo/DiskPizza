@@ -27,6 +27,14 @@ namespace DiskPizza.DataAccess
                     cmd.Parameters.Add("@ID_PRODUTO", SqlDbType.Int).Value = obj.Produto.Id;
                     cmd.Parameters.Add("@ID_TAMANHO", SqlDbType.Int).Value = obj.Tamanho.Id;
 
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
                     //Abrindo conexão com o banco de dados
                     conn.Open();
                     //Executando instrução sql

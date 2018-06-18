@@ -27,6 +27,14 @@ namespace DiskPizza.DataAccess
                     cmd.Parameters.Add("@ID_PRODXTAMANHO", SqlDbType.Int).Value = obj.Produto_x_Tamanho.Id;
                     cmd.Parameters.Add("@PRECO_ITEM", SqlDbType.Decimal).Value = obj.Preco_item;
 
+                    foreach (SqlParameter parameter in cmd.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
                     //Abrindo conexão com o banco de dados
                     conn.Open();
                     //Executando instrução sql
@@ -84,7 +92,7 @@ namespace DiskPizza.DataAccess
                             {
                                 Id = Convert.ToInt32(row["ID_PEDIDO"]),
                                 Data = Convert.ToDateTime(row["DATA_PEDIDO"]),
-                                Qtd_sabores = Convert.ToInt32(row["QUANTIDADE_SABORES"]),
+                                QtdSabores = Convert.ToInt32(row["QUANTIDADE_SABORES"]),
                                 Status = row["STATUS_PEDIDO"].ToString(),
                                 Tamanho = row["TAMANHO_PEDIDO"].ToString(),
                                 Cep = row["ST_CEP"].ToString(),
