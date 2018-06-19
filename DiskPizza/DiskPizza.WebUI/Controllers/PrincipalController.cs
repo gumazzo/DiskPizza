@@ -3,7 +3,6 @@ using DiskPizza.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DiskPizza.WebUI.Controllers
@@ -14,8 +13,17 @@ namespace DiskPizza.WebUI.Controllers
         public ActionResult Index()
         {
             ViewBag.Tipos = new ProdutoDAO().BuscarTodos().Select(o => o.Tipo).Distinct().ToList();
-            ViewBag.Pizzas = new ProdutoDAO().BuscarTodos();
+            ViewBag.Tamanhos = new TamanhoDAO().BuscarTodos();
+            ViewBag.Pizzas = new List<Produto_x_Tamanho>();
             return View();
+        }
+
+        public ActionResult BuscarCardapio(int tamanho)
+        {
+            ViewBag.Tipos = new ProdutoDAO().BuscarTodos().Select(o => o.Tipo).Distinct().ToList();
+            ViewBag.Tamanhos = new TamanhoDAO().BuscarTodos();
+            ViewBag.Pizzas = new Prod_x_TamanhoDAO().BuscarPorTamanho(tamanho);
+            return PartialView("_Cardapio");
         }
 
         public ActionResult SalvarPedido(Pedido obj)
@@ -33,9 +41,9 @@ namespace DiskPizza.WebUI.Controllers
             return View();
         }
 
-        public ActionResult AdicionarItem(Produto_x_Tamanho obj)
+        public ActionResult AdicionarItem(int produtoXtamanho, int quantidadeDeSabores)
         {
-            return View();
+            return PartialView("_Pedido");
         }
     }
 }

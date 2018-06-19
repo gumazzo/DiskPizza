@@ -1,6 +1,5 @@
 ﻿@using DiskPizza.Models
 @model Produto
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -15,8 +14,6 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
 </head>
 <body>
     <div class="container">
@@ -35,12 +32,12 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <label>Distância: </label>
+                                    <label>Distância:</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <label>Tempo de entrega: </label>
+                                    <label>Tempo de entrega:</label>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -58,78 +55,32 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <label class="control-label">Tamanho:</label>
-                            <input id="broto" type="radio" name="tamanho" /> Broto
-                            <input id="media" type="radio" name="tamanho" /> Média
-                            <input id="grande" type="radio" name="tamanho" /> Grande
-                            <input id="gigante" type="radio" name="tamanho" /> Gigante
+                            @foreach (Tamanho tamanho in (List<Tamanho>)ViewBag.Tamanhos)
+                            {
+                                <input type="radio" name="tamanho" data-tamanho="@tamanho.Id" /> @tamanho.Nome
+                            }
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
                             <label class="control-label">Quantidade de sabores:</label>
-                            <input id="sabor1" type="radio" disabled="disabled" name="sabores" /> 1
-                            <input id="sabor2" type="radio" disabled="disabled" name="sabores" /> 2
-                            <input id="sabor3" type="radio" disabled="disabled" name="sabores" /> 3
-                            <input id="sabor4" type="radio" disabled="disabled" name="sabores" /> 4
+                            <input id="sabor1" type="radio" disabled="disabled" name="sabores" value="1" /> 1
+                            <input id="sabor2" type="radio" disabled="disabled" name="sabores" value="2" /> 2
+                            <input id="sabor3" type="radio" disabled="disabled" name="sabores" value="3" /> 3
+                            <input id="sabor4" type="radio" disabled="disabled" name="sabores" value="4" /> 4
                         </div>
                     </div>
                     <div id="cardapio" class="form-group" style="display: none;">
-                        @foreach (var tipo in (List<String>)ViewBag.Tipos)
-                        {
-                            <div class="col-md-4">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>@tipo</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var pizza in ((List<Produto>)ViewBag.Pizzas).Where(o => o.Tipo == tipo))
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @pizza.Nome
-                                                    <a class="lnkAdd" href="#">
-                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-left: 15px;"></span>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        }
+                        @Html.Partial("_Cardapio")
                     </div>
                     <hr />
                     <div id="pedido" class="form-group" style="display: none;">
-                        <div class="col-md-12">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Pizza</th>
-                                        <th>Valor (R$)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Coluna 1</td>
-                                        <td>Coluna 2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Coluna 1</td>
-                                        <td>Coluna 2</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="col-md-12 text-right">
-                                TOTAL: R$ 100,00
-                            </div>
-                        </div>
+                        @Html.Partial("_Pedido")
                     </div>
                     <div class="form-group">
                         <div class="col-md-12 text-right">
-                            <a href=@Url.Action("Index", "Pagamento")>
-                                <input type="button" class="btn btn-primary" value="Finalizar e ir para pagamento" ; return true;" />
+                            <a href="@Url.Action("Index", "Pagamento")">
+                                <input type="button" class="btn btn-primary" value="Finalizar e ir para pagamento" />
                             </a>
                         </div>
                     </div>
@@ -137,79 +88,116 @@
             </div>
         </div>
     </div>
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#broto").change(function () {
-                $("#sabor1").removeAttr("checked");
-                $("#sabor2").removeAttr("checked");
-                $("#sabor3").removeAttr("checked");
-                $("#sabor4").removeAttr("checked");
-                $("#cardapio").hide();
-                $("#pedido").hide();
+            function adicionarItem() {
+                $("a.lnkAdd").each(function () {
+                    $(this).click(function () {
+                        if ($("input[type='radio'][name='sabores']:checked").length > 0) {
+                            $.ajax({
+                                url: $(this).attr("href"),
+                                data: {
+                                    produtoXtamanho: $(this).data("pizza"),
+                                    quantidadeDeSabores: $("input[type='radio'][name='sabores']:checked").val()
+                                },
+                                method: "GET",
+                                cache: false,
+                                success: function (result) {
+                                    $("#pedido").html(result);
+                                    $("#pedido").show();
+                                },
+                                error: function (result) {
+                                    alert(result);
+                                }
+                            });
+                        } else {
+                            alert('É necessário selecionar a quantidade de sabores!');
+                        }
+                        return false;
+                    });
+                });
+            }
 
-                $("#sabor1").removeAttr("disabled");
-                $("#sabor2").removeAttr("disabled");
-                $("#sabor3").attr("disabled", "disabled");
-                $("#sabor4").attr("disabled", "disabled");
-            });
+            $("input[type='radio'][name='tamanho']").change(function () {
+                if ($(this).data("tamanho") == 1) {
+                    $("#sabor1").removeAttr("checked");
+                    $("#sabor2").removeAttr("checked");
+                    $("#sabor3").removeAttr("checked");
+                    $("#sabor4").removeAttr("checked");
+                    $("#cardapio").hide();
+                    $("#pedido").hide();
 
-            $("#media").change(function () {
-                $("#sabor1").removeAttr("checked");
-                $("#sabor2").removeAttr("checked");
-                $("#sabor3").removeAttr("checked");
-                $("#sabor4").removeAttr("checked");
-                $("#cardapio").hide();
-                $("#pedido").hide();
+                    $("#sabor1").removeAttr("disabled");
+                    $("#sabor2").attr("disabled", "disabled");
+                    $("#sabor3").attr("disabled", "disabled");
+                    $("#sabor4").attr("disabled", "disabled");
 
-                $("#sabor1").removeAttr("disabled");
-                $("#sabor2").removeAttr("disabled");
-                $("#sabor3").removeAttr("disabled");
-                $("#sabor4").attr("disabled", "disabled");
-            });
+                } else if ($(this).data("tamanho") == 2) {
 
-            $("#grande").change(function () {
-                $("#sabor1").removeAttr("checked");
-                $("#sabor2").removeAttr("checked");
-                $("#sabor3").removeAttr("checked");
-                $("#sabor4").removeAttr("checked");
-                $("#cardapio").hide();
-                $("#pedido").hide();
+                    $("#sabor1").removeAttr("checked");
+                    $("#sabor2").removeAttr("checked");
+                    $("#sabor3").removeAttr("checked");
+                    $("#sabor4").removeAttr("checked");
+                    $("#cardapio").hide();
+                    $("#pedido").hide();
 
-                $("#sabor1").removeAttr("disabled");
-                $("#sabor2").removeAttr("disabled");
-                $("#sabor3").removeAttr("disabled");
-                $("#sabor4").attr("disabled", "disabled");
-            });
+                    $("#sabor1").removeAttr("disabled");
+                    $("#sabor2").removeAttr("disabled");
+                    $("#sabor3").attr("disabled", "disabled");
+                    $("#sabor4").attr("disabled", "disabled");
 
-            $("#gigante").change(function () {
-                $("#sabor1").removeAttr("checked");
-                $("#sabor2").removeAttr("checked");
-                $("#sabor3").removeAttr("checked");
-                $("#sabor4").removeAttr("checked");
-                $("#cardapio").hide();
-                $("#pedido").hide();
+                } else if ($(this).data("tamanho") == 3) {
 
-                $("#sabor1").removeAttr("disabled");
-                $("#sabor2").removeAttr("disabled");
-                $("#sabor3").removeAttr("disabled");
-                $("#sabor4").removeAttr("disabled");
+                    $("#sabor1").removeAttr("checked");
+                    $("#sabor2").removeAttr("checked");
+                    $("#sabor3").removeAttr("checked");
+                    $("#sabor4").removeAttr("checked");
+                    $("#cardapio").hide();
+                    $("#pedido").hide();
+
+                    $("#sabor1").removeAttr("disabled");
+                    $("#sabor2").removeAttr("disabled");
+                    $("#sabor3").removeAttr("disabled");
+                    $("#sabor4").attr("disabled", "disabled");
+
+                } else if ($(this).data("tamanho") == 4) {
+
+                    $("#sabor1").removeAttr("checked");
+                    $("#sabor2").removeAttr("checked");
+                    $("#sabor3").removeAttr("checked");
+                    $("#sabor4").removeAttr("checked");
+                    $("#cardapio").hide();
+                    $("#pedido").hide();
+
+                    $("#sabor1").removeAttr("disabled");
+                    $("#sabor2").removeAttr("disabled");
+                    $("#sabor3").removeAttr("disabled");
+                    $("#sabor4").removeAttr("disabled");
+
+                }
+
+                $.ajax({
+                    url: '@Url.Action("BuscarCardapio", "Principal")',
+                    data: {
+                        tamanho: $(this).data("tamanho")
+                    },
+                    method: "GET",
+                    cache: false,
+                    success: function (result) {
+                        $("#cardapio").html(result);
+                        $("#cardapio").show();
+                        adicionarItem();
+                    },
+                    error: function (result) {
+                        alert(result);
+                    }
+                });
             });
 
             $('[id^=sabor]').change(function () {
                 $("#cardapio").show();
-            });
-
-            $("a.lnkAdd").click(function () {
-                $("#pedido").show();
-                var url = '@Url.Action("NomeMetodo", "NomeController")';
-                /*$.ajax({
-                    type:"POST",
-                    data:{'idProd': idProd},
-                    url:url,
-                    success:function(data){
-                        $('#resultItem').html(data);
-                    }
-                })*/
             });
         });
     </script>

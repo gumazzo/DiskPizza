@@ -1,0 +1,34 @@
+﻿@using DiskPizza.Models
+
+@foreach (var tipo in (List<string>)ViewBag.Tipos)
+{
+    <div class="col-md-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">@tipo</th>
+                    <th style="width: 30%;">Preço (R$)</th>
+                    <th style="width: 20%;">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pizza in ((List<Produto_x_Tamanho>)ViewBag.Pizzas).Where(o => o.Produto.Tipo == tipo))
+                {
+                    <tr>
+                        <td style="width: 50%;">
+                            @pizza.Produto.Nome
+                        </td>
+                        <td style="width: 30%;">
+                            @string.Format("{0:C2}", pizza.Preco_Total)
+                        </td>
+                        <td class="text-center" style="width: 20%;">
+                            <a class="lnkAdd" href="@Url.Action("AdicionarItem", "Principal")" data-pizza="@pizza.Id">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-left: 15px;"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
