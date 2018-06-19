@@ -16,7 +16,8 @@ namespace DiskPizza.DataAccess
             {
                 //Criando instrução sql para inserir na tabela de estados
                 string strSQL = @"INSERT INTO TB_PEDIDO(DT_DATA, ST_TAMANHO, QNT_SABORES, ST_STATUS, ID_USUARIO, ST_CEP, ST_RUA, ST_NUMEROLOCAL)
-                                  VALUES (@DT_DATA, @ST_TAMANHO, @QNT_SABORES, @ST_STATUS, @ID_USUARIO, @ST_CEP, @ST_RUA, @ST_NUMEROLOCAL);";
+                                  VALUES (@DT_DATA, @ST_TAMANHO, @QNT_SABORES, @ST_STATUS, @ID_USUARIO, @ST_CEP, @ST_RUA, @ST_NUMEROLOCAL);
+                                  SELECT SCOPE_IDENTITY();";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -43,9 +44,54 @@ namespace DiskPizza.DataAccess
                     //Abrindo conexão com o banco de dados
                     conn.Open();
                     //Executando instrução sql
-                    cmd.ExecuteNonQuery();
+                    obj.Id = Convert.ToInt32(cmd.ExecuteScalar());
                     //Fechando conexão com o banco de dados
                     conn.Close();
+                }
+            }
+        }
+
+        public Pedido BuscarPorUsuario(int usuario)
+        {
+            var lst = new List<Pedido>();
+
+            //Criando uma conexão com o banco de dados
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                //Criando instrução sql para selecionar todos os registros na tabela de estados
+                string strSQL = @"SELECT TOP 1 * FROM TB_PEDIDO WHERE ID_USUARIO = @ID_USUARIO AND ST_STATUS = 'PENDENTE' ORDER BY ID_PEDIDO DESC;";
+
+                //Criando um comando sql que será executado na base d edados
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    //Abrindo conexão com o banco de dados
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@ID_USUARIO", SqlDbType.Int).Value = usuario;
+                    cmd.CommandText = strSQL;
+                    //Executando instrução sql
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+                    conn.Close();
+
+                    if (!(dt != null && dt.Rows.Count > 0))
+                        return null;
+
+                    var row = dt.Rows[0];
+                    var pedido = new Pedido()
+                    {
+                        Id = Convert.ToInt32(row["ID_PEDIDO"]),
+                        Data = Convert.ToDateTime(row["DT_DATA"]),
+                        QtdSabores = Convert.ToInt32(row["QNT_SABORES"]),
+                        Status = row["ST_STATUS"].ToString(),
+                        Tamanho = row["ST_TAMANHO"].ToString(),
+                        Cep = row["ST_CEP"].ToString(),
+                        Rua = row["ST_RUA"].ToString(),
+                        NumeroL = row["ST_NUMEROLOCAL"].ToString()
+                    };
+
+                    return pedido;
                 }
             }
         }

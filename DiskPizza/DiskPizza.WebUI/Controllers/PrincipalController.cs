@@ -43,21 +43,43 @@ namespace DiskPizza.WebUI.Controllers
 
         public ActionResult AdicionarItem(int produtoXtamanho, int quantidadeDeSabores)
         {
-            //Criar pedido usuário
-            var pedido = new Pedido();
-            pedido.Data = DateTime.Now;
-            pedido.Usuario = new Usuario() { Id = ((Usuario)User).Id };
+            //se tiver algum pedido pendente no banco de dados, usar o mesmo pedido par adicionar novos itens
+            var pedido = new PedidoDAO().BuscarPorUsuario(((Usuario)User).Id);
 
+            //criando pedido e salvando este pedido no banco de dados
+            if (pedido == null)
+            {
+                pedido = new Pedido();
+                pedido.Data = DateTime.Now;
+                pedido.Usuario = new Usuario() { Id = ((Usuario)User).Id };
+                pedido.QtdSabores = quantidadeDeSabores;
+                pedido.Cep = ((Usuario)User).Cep;
+                pedido.Rua = ((Usuario)User).Rua;
+                pedido.NumeroL = ((Usuario)User).Numero;
+                pedido.Status = "PENDENTE";
 
-            //Salvar no banco de dados
+                new PedidoDAO().Inserir(pedido);
+            }
 
-            //Criar um item para o pedido
+            //buscando no banco de dados produto x tamanho que foi selecionado na tela pelo usuário
+            var pxt = new Prod_x_TamanhoDAO().BuscarPorId(produtoXtamanho);
 
-            //Salvar item que criou
+            //adicionando item selecionado ao pedido
+            var item = new Item_Pedido()
+            {
+                Pedido = pedido,
+                Produto_x_Tamanho = pxt,
+                Preco_item = pxt.Preco_Total / Convert.ToDecimal(quantidadeDeSabores)
+            };
 
-            //Pegar o pedido objeto com o item dentro dele e passar para a partialView
+            //salvando item que foi criado
+            new Item_PedidoDAO().Inserir(item);
 
-            return PartialView("_Pedido");
+            //recarregando todos os itens do pedido
+            pedido.Itens = new Item_PedidoDAO().BuscarPorPedido(pedido.Id);
+
+            //retornando a partial view com o pedido e seus itens
+            return PartialView("_Pedido", pedido);
         }
     }
 }

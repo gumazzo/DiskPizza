@@ -16,14 +16,14 @@ namespace DiskPizza.DataAccess
             {
                 //Criando instrução sql para inserir na tabela de estados
                 string strSQL = @"INSERT INTO TB_ITEM_PEDIDO(ID_PEDIDO, ID_PRODXTAMANHO, PRECO_ITEM)
-                                    VALUES (@ID_PEDIDO, @ID_PRODXTAMANHO, @PRECO_ITEM);";
+                                  VALUES (@ID_PEDIDO, @ID_PRODXTAMANHO, @PRECO_ITEM);";
 
                 //Criando um comando sql que será executado na base de dados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
                     //Preenchendo os parâmetros da instrução sql
-                    cmd.Parameters.Add("@ID_PEDIDO", SqlDbType.Decimal).Value = obj.Pedido.Id;
+                    cmd.Parameters.Add("@ID_PEDIDO", SqlDbType.Int).Value = obj.Pedido.Id;
                     cmd.Parameters.Add("@ID_PRODXTAMANHO", SqlDbType.Int).Value = obj.Produto_x_Tamanho.Id;
                     cmd.Parameters.Add("@PRECO_ITEM", SqlDbType.Decimal).Value = obj.Preco_item;
 
@@ -43,6 +43,86 @@ namespace DiskPizza.DataAccess
                     conn.Close();
                 }
             }
+        }
+
+        public List<Item_Pedido> BuscarPorPedido(int pedido)
+        {
+            var lst = new List<Item_Pedido>();
+
+            //Criando uma conexão com o banco de dados
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
+            {
+                //Criando instrução sql para selecionar todos os registros na tabela de estados
+                string strSQL = @"SELECT 
+                                    IP.*,
+                                    P.DT_DATA AS DATA_PEDIDO,
+                                    P.QNT_SABORES AS QUANTIDADE_SABORES,
+                                    P.ST_STATUS AS STATUS_PEDIDO,
+                                    P.ST_TAMANHO AS TAMANHO_PEDIDO,
+                                    PT.DT_PRECO_TOTAL AS PRECO_TOTAL,
+                                    P.ST_CEP AS CEP_PEDIDO,
+                                    P.ST_RUA AS RUA_PEDIDO,
+                                    P.ST_NUMEROLOCAL AS NUMEROLOCAL_PEDIDO,
+                                    PR.ID_PRODUTO,
+                                    PR.ST_NOME AS NOME_PRODUTO,
+                                    PR.ST_TIPO AS TIPO_PRODUTO
+                                FROM TB_ITEM_PEDIDO IP
+                                INNER JOIN TB_PEDIDO P ON (P.ID_PEDIDO = IP.ID_PEDIDO)
+                                INNER JOIN TB_PRODUTO_X_TAMANHO PT ON (PT.ID_PRODXTAMANHO = IP.ID_PRODXTAMANHO)
+                                INNER JOIN TB_PRODUTO PR ON (PR.ID_PRODUTO = PT.ID_PRODUTO)
+                                WHERE IP.ID_PEDIDO = @ID_PEDIDO;";
+
+                //Criando um comando sql que será executado na base d edados
+                using (SqlCommand cmd = new SqlCommand(strSQL))
+                {
+                    //Abrindo conexão com o banco de dados
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.Parameters.Add("@ID_PEDIDO", SqlDbType.Int).Value = pedido;
+                    cmd.CommandText = strSQL;
+                    //Executando instrução sql
+                    var dataReader = cmd.ExecuteReader();
+                    var dt = new DataTable();
+                    dt.Load(dataReader);
+                    //Fechando conexão com o banco de dados
+                    conn.Close();
+
+                    //Perconrrendo todos os registros encontrados na base de dados e adicionando em uma lista
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var item_pedido = new Item_Pedido()
+                        {
+                            Id = Convert.ToInt32(row["ID_ITEM"]),
+                            Preco_item = Convert.ToDecimal(row["PRECO_ITEM"]),
+                            Pedido = new Pedido()
+                            {
+                                Id = Convert.ToInt32(row["ID_PEDIDO"]),
+                                Data = Convert.ToDateTime(row["DATA_PEDIDO"]),
+                                QtdSabores = Convert.ToInt32(row["QUANTIDADE_SABORES"]),
+                                Status = row["STATUS_PEDIDO"].ToString(),
+                                Tamanho = row["TAMANHO_PEDIDO"].ToString(),
+                                Cep = row["CEP_PEDIDO"].ToString(),
+                                Rua = row["RUA_PEDIDO"].ToString(),
+                                NumeroL = row["NUMEROLOCAL_PEDIDO"].ToString()
+                            },
+                            Produto_x_Tamanho = new Produto_x_Tamanho()
+                            {
+                                Id = Convert.ToInt32(row["ID_PRODXTAMANHO"]),
+                                Preco_Total = Convert.ToDecimal(row["PRECO_TOTAL"]),
+                                Produto = new Produto()
+                                {
+                                    Id = Convert.ToInt32(row["ID_PRODUTO"]),
+                                    Nome = row["NOME_PRODUTO"].ToString(),
+                                    Tipo = row["TIPO_PRODUTO"].ToString()
+                                }
+                            }
+                        };
+
+                        lst.Add(item_pedido);
+                    }
+                }
+            }
+            return lst;
         }
 
         public List<Item_Pedido> BuscarTodos()

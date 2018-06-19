@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DiskPizza.Models
 {
@@ -13,5 +14,11 @@ namespace DiskPizza.Models
         public string Cep { get; set; }
         public string Rua { get; set; }
         public string NumeroL { get; set; }
+        public List<Item_Pedido> Itens { get; set; }
+
+        public Pedido()
+        {
+            this.Itens = new List<Item_Pedido>();
+        }
     }
 }

@@ -96,11 +96,20 @@
                 $("a.lnkAdd").each(function () {
                     $(this).click(function () {
                         if ($("input[type='radio'][name='sabores']:checked").length > 0) {
+
+                            var quantidadeDeItens = $("table > tbody > tr", "div#pedido").length;
+                            var quantidadeDeSabores = $("input[type='radio'][name='sabores']:checked").val();
+
+                            if (quantidadeDeItens >= quantidadeDeSabores) {
+                                alert("Não é possível adicionar mais sabores, pois o limite já foi atingido!");
+                                return false;
+                            }
+
                             $.ajax({
                                 url: $(this).attr("href"),
                                 data: {
                                     produtoXtamanho: $(this).data("pizza"),
-                                    quantidadeDeSabores: $("input[type='radio'][name='sabores']:checked").val()
+                                    quantidadeDeSabores: quantidadeDeSabores
                                 },
                                 method: "GET",
                                 cache: false,
