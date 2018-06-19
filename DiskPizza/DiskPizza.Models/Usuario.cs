@@ -18,6 +18,9 @@ namespace DiskPizza.Models
         public string Cep { get; set; }
         public string Rua { get; set; }
         public string Numero { get; set; }
+        public int NumeroCartao { get; set; }
+        public int ValidadeCartao { get; set; }
+        public int CodCartao { get; set; }
 
         [ScriptIgnore]
         [IgnoreDataMember]

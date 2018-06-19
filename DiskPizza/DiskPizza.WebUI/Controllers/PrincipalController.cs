@@ -26,6 +26,13 @@ namespace DiskPizza.WebUI.Controllers
             return View();
         }
 
+        public ActionResult Finalizar(Pedido obj)
+        {
+            obj.Data = DateTime.Now;
+            obj.Usuario = new Usuario() { Id = ((Usuario)User).Id };
+            return View();
+        }
+
         public ActionResult AdicionarItem(Produto_x_Tamanho obj)
         {
             return View();

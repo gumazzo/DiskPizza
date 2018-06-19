@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ICustomPrincipal.cs" />
     <Compile Include="Item_Pedido.cs" />
+    <Compile Include="Pagamento.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="Produto.cs" />
     <Compile Include="Produto_x_Tamanho.cs" />
