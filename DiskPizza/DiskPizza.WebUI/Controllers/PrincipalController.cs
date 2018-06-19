@@ -43,6 +43,20 @@ namespace DiskPizza.WebUI.Controllers
 
         public ActionResult AdicionarItem(int produtoXtamanho, int quantidadeDeSabores)
         {
+            //Criar pedido usuário
+            var pedido = new Pedido();
+            pedido.Data = DateTime.Now;
+            pedido.Usuario = new Usuario() { Id = ((Usuario)User).Id };
+
+
+            //Salvar no banco de dados
+
+            //Criar um item para o pedido
+
+            //Salvar item que criou
+
+            //Pegar o pedido objeto com o item dentro dele e passar para a partialView
+
             return PartialView("_Pedido");
         }
     }
