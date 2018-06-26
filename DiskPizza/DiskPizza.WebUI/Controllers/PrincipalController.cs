@@ -53,9 +53,6 @@ namespace DiskPizza.WebUI.Controllers
                 pedido.Data = DateTime.Now;
                 pedido.Usuario = new Usuario() { Id = ((Usuario)User).Id };
                 pedido.QtdSabores = quantidadeDeSabores;
-                pedido.Cep = ((Usuario)User).Cep;
-                pedido.Rua = ((Usuario)User).Rua;
-                pedido.NumeroL = ((Usuario)User).Numero;
                 pedido.Status = "PENDENTE";
 
                 new PedidoDAO().Inserir(pedido);

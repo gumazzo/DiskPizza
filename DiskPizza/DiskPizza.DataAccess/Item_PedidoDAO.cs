@@ -60,9 +60,9 @@ namespace DiskPizza.DataAccess
                                     P.ST_STATUS AS STATUS_PEDIDO,
                                     P.ST_TAMANHO AS TAMANHO_PEDIDO,
                                     PT.DT_PRECO_TOTAL AS PRECO_TOTAL,
-                                    P.ST_CEP AS CEP_PEDIDO,
-                                    P.ST_RUA AS RUA_PEDIDO,
-                                    P.ST_NUMEROLOCAL AS NUMEROLOCAL_PEDIDO,
+                                    
+                                    
+                                    
                                     PR.ID_PRODUTO,
                                     PR.ST_NOME AS NOME_PRODUTO,
                                     PR.ST_TIPO AS TIPO_PRODUTO
@@ -100,10 +100,7 @@ namespace DiskPizza.DataAccess
                                 Data = Convert.ToDateTime(row["DATA_PEDIDO"]),
                                 QtdSabores = Convert.ToInt32(row["QUANTIDADE_SABORES"]),
                                 Status = row["STATUS_PEDIDO"].ToString(),
-                                Tamanho = row["TAMANHO_PEDIDO"].ToString(),
-                                Cep = row["CEP_PEDIDO"].ToString(),
-                                Rua = row["RUA_PEDIDO"].ToString(),
-                                NumeroL = row["NUMEROLOCAL_PEDIDO"].ToString()
+                                Tamanho = row["TAMANHO_PEDIDO"].ToString()
                             },
                             Produto_x_Tamanho = new Produto_x_Tamanho()
                             {
@@ -139,10 +136,10 @@ namespace DiskPizza.DataAccess
                                     p.QNT_SABORES AS QUANTIDADE_SABORES,
                                     p.ST_STATUS AS STATUS_PEDIDO,
                                     p.ST_TAMANHO AS TAMANHO_PEDIDO,
-                                    pt.DT_PRECO_TOTAL AS PRECO_TOTAL,
-                                    pt.ST_CEP AS CEP_PEDIDO,
-                                    pt.ST_RUA AS RUA_PEDIDO,
-                                    pt.ST_NUMEROLOCAL AS NUMEROLOCAL_PEDIDO
+                                    pt.DT_PRECO_TOTAL AS PRECO_TOTAL
+                                    
+                                    
+                                    
                                 FROM TB_ITEM_PEDIDO ip
                                 INNER JOIN TB_PEDIDO p ON (p.ID_PEDIDO = ip.ID_PEDIDO)
                                 INNER JOIN TB_PRODUTO_X_TAMANHO pt ON (pt.ID_TAMANHO = ip.ID_TAMANHO);";
@@ -174,10 +171,7 @@ namespace DiskPizza.DataAccess
                                 Data = Convert.ToDateTime(row["DATA_PEDIDO"]),
                                 QtdSabores = Convert.ToInt32(row["QUANTIDADE_SABORES"]),
                                 Status = row["STATUS_PEDIDO"].ToString(),
-                                Tamanho = row["TAMANHO_PEDIDO"].ToString(),
-                                Cep = row["ST_CEP"].ToString(),
-                                Rua = row["ST_RUA"].ToString(),
-                                NumeroL = row["ST_NUMEROLOCAL"].ToString()
+                                Tamanho = row["TAMANHO_PEDIDO"].ToString()
                             },
                             Produto_x_Tamanho = new Produto_x_Tamanho()
                             {

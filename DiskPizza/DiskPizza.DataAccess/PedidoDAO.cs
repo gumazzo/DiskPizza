@@ -15,8 +15,8 @@ namespace DiskPizza.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para inserir na tabela de estados
-                string strSQL = @"INSERT INTO TB_PEDIDO(DT_DATA, ST_TAMANHO, QNT_SABORES, ST_STATUS, ID_USUARIO, ST_CEP, ST_RUA, ST_NUMEROLOCAL)
-                                  VALUES (@DT_DATA, @ST_TAMANHO, @QNT_SABORES, @ST_STATUS, @ID_USUARIO, @ST_CEP, @ST_RUA, @ST_NUMEROLOCAL);
+                string strSQL = @"INSERT INTO TB_PEDIDO(DT_DATA, ST_TAMANHO, QNT_SABORES, ST_STATUS, ID_USUARIO)
+                                  VALUES (@DT_DATA, @ST_TAMANHO, @QNT_SABORES, @ST_STATUS, @ID_USUARIO);
                                   SELECT SCOPE_IDENTITY();";
 
                 //Criando um comando sql que será executado na base de dados
@@ -29,9 +29,6 @@ namespace DiskPizza.DataAccess
                     cmd.Parameters.Add("@QNT_SABORES", SqlDbType.Int).Value = obj.QtdSabores;
                     cmd.Parameters.Add("@ST_STATUS", SqlDbType.VarChar).Value = obj.Status;
                     cmd.Parameters.Add("@ID_USUARIO", SqlDbType.Int).Value = obj.Usuario.Id;
-                    cmd.Parameters.Add("@ST_CEP", SqlDbType.VarChar).Value = obj.Cep;
-                    cmd.Parameters.Add("@ST_RUA", SqlDbType.VarChar).Value = obj.Rua;
-                    cmd.Parameters.Add("@ST_NUMEROLOCAL", SqlDbType.VarChar).Value = obj.NumeroL;
 
                     foreach (SqlParameter parameter in cmd.Parameters)
                     {
@@ -85,10 +82,7 @@ namespace DiskPizza.DataAccess
                         Data = Convert.ToDateTime(row["DT_DATA"]),
                         QtdSabores = Convert.ToInt32(row["QNT_SABORES"]),
                         Status = row["ST_STATUS"].ToString(),
-                        Tamanho = row["ST_TAMANHO"].ToString(),
-                        Cep = row["ST_CEP"].ToString(),
-                        Rua = row["ST_RUA"].ToString(),
-                        NumeroL = row["ST_NUMEROLOCAL"].ToString()
+                        Tamanho = row["ST_TAMANHO"].ToString()
                     };
 
                     return pedido;
@@ -129,10 +123,7 @@ namespace DiskPizza.DataAccess
                             Data = Convert.ToDateTime(row["DT_DATA"]),
                             QtdSabores = Convert.ToInt32(row["QNT_SABORES"]),
                             Status = row["ST_STATUS"].ToString(),
-                            Tamanho = row["ST_TAMANHO"].ToString(),
-                            Cep = row["ST_CEP"].ToString(),
-                            Rua = row["ST_RUA"].ToString(),
-                            NumeroL = row["ST_NUMEROLOCAL"].ToString()
+                            Tamanho = row["ST_TAMANHO"].ToString()
                         };
 
                         lst.Add(pedido);

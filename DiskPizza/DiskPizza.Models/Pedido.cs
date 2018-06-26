@@ -11,9 +11,6 @@ namespace DiskPizza.Models
         public int QtdSabores { get; set; }
         public string Status { get; set; }
         public Usuario Usuario { get; set; }
-        public string Cep { get; set; }
-        public string Rua { get; set; }
-        public string NumeroL { get; set; }
         public List<Item_Pedido> Itens { get; set; }
 
         public Pedido()
