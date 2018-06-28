@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -16,50 +17,52 @@
     <![endif]-->
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <form action="@Url.Action("Salvar","CadProd")" class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <img src="~/Imagens/pizza.jpg" alt="" class="img-thumbnail">
-                        </div>
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>NOME DA PIZZARIA</label>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="@Url.Action("Salvar","CadProd")" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <img src="~/Imagens/pizza.jpg" alt="" class="img-thumbnail">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>NOME DA PIZZARIA</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <h3>CADASTRAR PRODUTO</h3>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h3>CADASTRAR PRODUTO</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.Nome, "Nome da pizza:", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Nome, "Nome da pizza:", new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Tipo, "Tipo da Pizza:", new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.Tipo, new { @class = "form-control" })
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.Tipo, "Tipo da Pizza:", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Tipo, new { @class = "form-control" })
+                        <div class="form-group">
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                <a href="@Url.Action("Index","ListProd")" class="btn btn-default">Cancelar</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12 text-right">
-                            <button type="submit" class="btn btn-primary">Salvar</button>
-                            <a href="@Url.Action("Index","ListProd")" class="btn btn-default">Cancelar</a>
-                        </div>
-                    </div>
 
 
 
 
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+
 </body>
 </html>
