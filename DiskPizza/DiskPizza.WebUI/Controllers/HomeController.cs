@@ -12,5 +12,10 @@ namespace DiskPizza.WebUI.Controllers
         {
             return RedirectToAction("Index", "Inicio");
         }
+
+        public ActionResult IndexAdm()
+        {
+            return View();
+        }
     }
 }

@@ -58,18 +58,17 @@ namespace DiskPizza.DataAccess
                                     P.DT_DATA AS DATA_PEDIDO,
                                     P.QNT_SABORES AS QUANTIDADE_SABORES,
                                     P.ST_STATUS AS STATUS_PEDIDO,
-                                    P.ST_TAMANHO AS TAMANHO_PEDIDO,
                                     PT.DT_PRECO_TOTAL AS PRECO_TOTAL,
-                                    
-                                    
-                                    
                                     PR.ID_PRODUTO,
                                     PR.ST_NOME AS NOME_PRODUTO,
-                                    PR.ST_TIPO AS TIPO_PRODUTO
+                                    PR.ST_TIPO AS TIPO_PRODUTO,
+                                    TM.ID_TAMANHO,
+                                    TM.ST_NOME AS NOME_TAMANHO
                                 FROM TB_ITEM_PEDIDO IP
                                 INNER JOIN TB_PEDIDO P ON (P.ID_PEDIDO = IP.ID_PEDIDO)
                                 INNER JOIN TB_PRODUTO_X_TAMANHO PT ON (PT.ID_PRODXTAMANHO = IP.ID_PRODXTAMANHO)
                                 INNER JOIN TB_PRODUTO PR ON (PR.ID_PRODUTO = PT.ID_PRODUTO)
+                                INNER JOIN TB_TAMANHO TM ON (TM.ID_TAMANHO = PT.ID_TAMANHO)
                                 WHERE IP.ID_PEDIDO = @ID_PEDIDO;";
 
                 //Criando um comando sql que será executado na base d edados
@@ -99,8 +98,7 @@ namespace DiskPizza.DataAccess
                                 Id = Convert.ToInt32(row["ID_PEDIDO"]),
                                 Data = Convert.ToDateTime(row["DATA_PEDIDO"]),
                                 QtdSabores = Convert.ToInt32(row["QUANTIDADE_SABORES"]),
-                                Status = row["STATUS_PEDIDO"].ToString(),
-                                Tamanho = row["TAMANHO_PEDIDO"].ToString()
+                                Status = row["STATUS_PEDIDO"].ToString()
                             },
                             Produto_x_Tamanho = new Produto_x_Tamanho()
                             {
@@ -111,6 +109,11 @@ namespace DiskPizza.DataAccess
                                     Id = Convert.ToInt32(row["ID_PRODUTO"]),
                                     Nome = row["NOME_PRODUTO"].ToString(),
                                     Tipo = row["TIPO_PRODUTO"].ToString()
+                                },
+                                Tamanho = new Tamanho()
+                                {
+                                    Id = Convert.ToInt32(row["ID_TAMANHO"]),
+                                    Nome = row["NOME_TAMANHO"].ToString()
                                 }
                             }
                         };
@@ -135,11 +138,7 @@ namespace DiskPizza.DataAccess
                                     p.DT_DATA AS DATA_PEDIDO,
                                     p.QNT_SABORES AS QUANTIDADE_SABORES,
                                     p.ST_STATUS AS STATUS_PEDIDO,
-                                    p.ST_TAMANHO AS TAMANHO_PEDIDO,
                                     pt.DT_PRECO_TOTAL AS PRECO_TOTAL
-                                    
-                                    
-                                    
                                 FROM TB_ITEM_PEDIDO ip
                                 INNER JOIN TB_PEDIDO p ON (p.ID_PEDIDO = ip.ID_PEDIDO)
                                 INNER JOIN TB_PRODUTO_X_TAMANHO pt ON (pt.ID_TAMANHO = ip.ID_TAMANHO);";
@@ -170,8 +169,7 @@ namespace DiskPizza.DataAccess
                                 Id = Convert.ToInt32(row["ID_PEDIDO"]),
                                 Data = Convert.ToDateTime(row["DATA_PEDIDO"]),
                                 QtdSabores = Convert.ToInt32(row["QUANTIDADE_SABORES"]),
-                                Status = row["STATUS_PEDIDO"].ToString(),
-                                Tamanho = row["TAMANHO_PEDIDO"].ToString()
+                                Status = row["STATUS_PEDIDO"].ToString()
                             },
                             Produto_x_Tamanho = new Produto_x_Tamanho()
                             {

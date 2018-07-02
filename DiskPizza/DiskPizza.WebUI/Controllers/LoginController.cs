@@ -28,6 +28,11 @@ namespace DiskPizza.WebUI.Controllers
             var userData = new JavaScriptSerializer().Serialize(usuarioLogado);
             FormsAuthenticationUtil.SetCustomAuthCookie(usuarioLogado.Email, userData, false);
 
+            if (usuarioLogado.Administrador)
+            {
+                return RedirectToAction("IndexAdm", "Home");
+            }
+
             return RedirectToAction("Index", "Inicio");
         }
 

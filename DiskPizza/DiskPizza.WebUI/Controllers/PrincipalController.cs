@@ -46,6 +46,9 @@ namespace DiskPizza.WebUI.Controllers
             //se tiver algum pedido pendente no banco de dados, usar o mesmo pedido par adicionar novos itens
             var pedido = new PedidoDAO().BuscarPorUsuario(((Usuario)User).Id);
 
+            //buscar todos os dados do usuário logado no banco de dados
+            var usuario = new UsuarioDAO().BuscarPorId(((Usuario)User).Id);
+
             //criando pedido e salvando este pedido no banco de dados
             if (pedido == null)
             {
@@ -55,6 +58,12 @@ namespace DiskPizza.WebUI.Controllers
                 pedido.QtdSabores = quantidadeDeSabores;
                 pedido.Status = "PENDENTE";
 
+                //preenchendo os dados de entrega do pedido baseado no endereço do usuário
+                pedido.Cep = usuario.Cep;
+                pedido.Rua = usuario.Rua;
+                pedido.Numero = usuario.Numero;
+
+                //inserindo o pedido no banco de dados
                 new PedidoDAO().Inserir(pedido);
             }
 
@@ -77,6 +86,16 @@ namespace DiskPizza.WebUI.Controllers
 
             //retornando a partial view com o pedido e seus itens
             return PartialView("_Pedido", pedido);
+        }
+
+        public ActionResult MeusPedidos()
+        {
+            var lst = new PedidoDAO().BuscarMeusPedidos(((Usuario)User).Id);
+            lst.ForEach(p =>
+            {
+                p.Itens = new Item_PedidoDAO().BuscarPorPedido(p.Id);
+            });
+            return View(lst);
         }
     }
 }

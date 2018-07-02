@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using DiskPizza.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,11 +22,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Cardápio", "Index", "Informacoes")</li>
-                    <li>@Html.ActionLink("Meu Pedido", "Index", "Principal")</li>                    
-                    
+                    <li>@Html.ActionLink("Fazer Pedido", "Index", "Principal")</li>
+                    <li>@Html.ActionLink("Meus Pedidos", "MeusPedidos", "Principal")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="@Url.Action("LogOff", "Login")">Sair</a></li>
+                    <li><a href="@Url.Action("LogOff", "Login")">@(((Usuario)User).Nome) (Sair)</a></li>
                 </ul>
             </div>
         </div>
@@ -37,10 +38,9 @@
             <p>&copy; @DateTime.Now.Year - Take Pizza</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/meiomask.js"></script>
-    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="@Url.Content("~/Scripts/meiomask.js")"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

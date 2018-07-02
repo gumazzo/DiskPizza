@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartaoDeCredito.cs" />
     <Compile Include="ICustomPrincipal.cs" />
     <Compile Include="Item_Pedido.cs" />
     <Compile Include="Pagamento.cs" />

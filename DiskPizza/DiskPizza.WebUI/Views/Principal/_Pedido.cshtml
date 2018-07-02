@@ -2,26 +2,37 @@
 @model Pedido
 @if (Model != null)
 {
-    <div class="col-md-12">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Sabores</th>
-                    <th class="text-right">Valor (R$)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Itens)
-                {
+    <div class="form-group">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>@item.Produto_x_Tamanho.Produto.Nome</td>
-                        <td class="text-right">@string.Format("{0:C2}", item.Preco_item)</td>
+                        <th>Sabores</th>
+                        <th>Tamanho</th>
+                        <th class="text-right">Valor (R$)</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Itens)
+                {
+                        <tr>
+                            <td>@item.Produto_x_Tamanho.Produto.Nome</td>
+                            <td>@item.Produto_x_Tamanho.Tamanho.Nome</td>
+                            <td class="text-right">@string.Format("{0:C2}", item.Preco_item)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="col-md-12 text-right">
+                <b>TOTAL: @string.Format("{0:C2}", Model.Itens.Sum(o => o.Preco_item))</b>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-md-12 text-right">
-            <b>TOTAL: @string.Format("{0:C2}", Model.Itens.Sum(o => o.Preco_item))</b>
+            <a href="@Url.Action("Index", "Pagamento", new { @id = Model.Id })">
+            <input type="button" class="btn btn-primary" value="Finalizar e ir para pagamento" />
+            </a>
         </div>
     </div>
 }

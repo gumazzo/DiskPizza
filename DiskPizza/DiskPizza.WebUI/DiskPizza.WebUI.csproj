@@ -240,6 +240,10 @@
     <Content Include="Views\ConteudoPed\Index.cshtml" />
     <Content Include="Views\ListProd\Index.cshtml" />
     <Content Include="Views\PedRealizados\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Home\IndexAdm.cshtml" />
+    <Content Include="Views\Login\IndexAdm.cshtml" />
+    <Content Include="Views\Principal\MeusPedidos.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
