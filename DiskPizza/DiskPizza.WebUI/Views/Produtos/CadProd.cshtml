@@ -1,0 +1,56 @@
+﻿@using DiskPizza.Models
+@model Produto
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <form action="@Url.Action("Salvar", "Produtos")" class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <h3>CADASTRAR PRODUTO</h3>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.LabelFor(m => m.Nome, "Nome da pizza:", new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(m => m.Tipo, "Tipo da Pizza:", new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Tipo, new { @class = "form-control", @placeholder = "Ex.: Tradicional, Especial ou Doce" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.Label("Tamanho(s):", new { @class = "control-label" })
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Tamanho</th>
+                                <th>Valor (R$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tamanho in (List<Tamanho>)ViewBag.Tamanhos)
+                            {
+                                <tr>
+                                    <td class="text-center" style="width: 50%;">@tamanho.Nome</td>
+                                    <td class="text-center" style="width: 50%;">
+                                        <input type="text" class="form-control" placeholder="0,00" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 text-right">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a href="@Url.Action("Index", "Produtos")" class="btn btn-default">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

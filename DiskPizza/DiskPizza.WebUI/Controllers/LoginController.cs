@@ -16,6 +16,11 @@ namespace DiskPizza.WebUI.Controllers
             return View();
         }
 
+        public ActionResult IndexAdm()
+        {
+            return View();
+        }
+
         public ActionResult Entrar(Usuario obj)
         {
             var usuarioLogado = new UsuarioDAO().Logar(obj);

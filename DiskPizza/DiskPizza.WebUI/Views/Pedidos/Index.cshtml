@@ -1,0 +1,50 @@
+﻿@using DiskPizza.Models
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Status</th>
+                        <th>Cliente</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>CEP</th>
+                        <th>Rua</th>
+                        <th>Número</th>
+                        <th>Qtd de Sabores</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Pedido item in Model)
+                    {
+                        <tr>
+                            <td>@string.Format("{0:dd/MM/yyyy HH:mm}", item.Data)</td>
+                            <td>@item.Status</td>
+                            <td>@item.Usuario.Nome</td>
+                            <td>@item.Usuario.Email</td>
+                            <td>@item.Usuario.Telefone</td>
+                            <td>@item.Cep</td>
+                            <td>@item.Rua</td>
+                            <td>@item.Numero</td>
+                            <td>@item.QtdSabores</td>
+                            <td class="text-center">
+                                <a href="@Url.Action("VerDetalhes", "Pedidos", new { @id = item.Id })">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </a>
+                                <a href="@Url.Action("Excluir", "Pedidos")">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿@using DiskPizza.Models
+@model Pedido
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <h3>Dados do pedido @Model.Id</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(m => m.Data, "Data:", new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Data, new { @class = "form-control" })
+                </div>
+                <div class="col-md-8">
+                    @Html.LabelFor(m => m.Status, "Status:", new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.LabelFor(m => m.Rua, "Rua:", new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Rua, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(m => m.Numero, "Número:", new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Numero, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(m => m.Cep, "CEP:", new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Cep, new { @class = "form-control" })
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <label class="control-label">Itens do pedido:</label>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Tamanho</th>
+                        <th class="text-right">Preço Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Item_Pedido item in Model.Itens)
+                    {
+                        <tr>
+                            <td>@item.Produto_x_Tamanho.Produto.Nome</td>
+                            <td>@item.Produto_x_Tamanho.Produto.Tipo</td>
+                            <td>@item.Produto_x_Tamanho.Tamanho.Nome</td>
+                            <td class="text-right">@string.Format("{0:C2}", item.Preco_item)</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-right">
+                            <b>@string.Format("{0:C2}", Model.Itens.Sum(item => item.Preco_item))</b>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

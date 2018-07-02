@@ -11,15 +11,6 @@ namespace DiskPizza.WebUI.Views.CadProd
     public class CadProdController : Controller
     {
         // GET: CadProd
-        public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult Salvar(Produto obj)
-        {
-            new ProdutoDAO().Inserir(obj);
-
-            return RedirectToAction("Index", "CadProd");
-        }
+        
     }
 }

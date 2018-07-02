@@ -172,7 +172,13 @@ namespace DiskPizza.DataAccess
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Db"].ConnectionString))
             {
                 //Criando instrução sql para selecionar todos os registros na tabela de pedidos
-                string strSQL = @"SELECT * FROM TB_PEDIDO;";
+                string strSQL = @"SELECT 
+                                    P.*, 
+                                    U.ST_NOME AS NOME_USUARIO, 
+                                    U.ST_EMAIL AS EMAIL_USUARIO,
+                                    U.ST_TELEFONE AS TELEFONE_USUARIO
+                                FROM TB_PEDIDO P
+                                INNER JOIN TB_USUARIO U ON (P.ID_USUARIO = U.ID_USUARIO);";
 
                 //Criando um comando sql que será executado na base d edados
                 using (SqlCommand cmd = new SqlCommand(strSQL))
@@ -199,7 +205,14 @@ namespace DiskPizza.DataAccess
                             Status = row["ST_STATUS"].ToString(),
                             Cep = row["ST_CEP"].ToString(),
                             Rua = row["ST_RUA"].ToString(),
-                            Numero = row["ST_NUMEROLOCAL"].ToString()
+                            Numero = row["ST_NUMEROLOCAL"].ToString(),
+                            Usuario = new Usuario()
+                            {
+                                Id = Convert.ToInt32(row["ID_USUARIO"]),
+                                Nome = row["NOME_USUARIO"].ToString(),
+                                Email = row["EMAIL_USUARIO"].ToString(),
+                                Telefone = row["TELEFONE_USUARIO"].ToString()
+                            }
                         };
 
                         lst.Add(pedido);

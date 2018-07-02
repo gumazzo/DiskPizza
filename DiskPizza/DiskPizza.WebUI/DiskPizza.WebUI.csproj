@@ -171,9 +171,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\CadProdController.cs" />
-    <Compile Include="Controllers\ListProdController.cs" />
-    <Compile Include="Controllers\ConteudoPedController.cs" />
-    <Compile Include="Controllers\PedRealizadosController.cs" />
+    <Compile Include="Controllers\ProdutosController.cs" />
+    <Compile Include="Controllers\PedidosController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -187,6 +186,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagens\avatar_100px.png" />
+    <Content Include="Imagens\avatar_2x.png" />
     <Content Include="Imagens\pizza.jpg" />
     <Content Include="Imagens\pizza2.jpg" />
     <Content Include="ApplicationInsights.config">
@@ -238,10 +239,10 @@
     <Content Include="Views\Pagamento\Index.cshtml" />
     <Content Include="Views\Principal\_Cardapio.cshtml" />
     <Content Include="Views\Principal\_Pedido.cshtml" />
-    <Content Include="Views\CadProd\Index.cshtml" />
-    <Content Include="Views\ConteudoPed\Index.cshtml" />
-    <Content Include="Views\ListProd\Index.cshtml" />
-    <Content Include="Views\PedRealizados\Index.cshtml" />
+    <Content Include="Views\Produtos\CadProd.cshtml" />
+    <Content Include="Views\Pedidos\VerDetalhes.cshtml" />
+    <Content Include="Views\Produtos\Index.cshtml" />
+    <Content Include="Views\Pedidos\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Home\IndexAdm.cshtml" />
     <Content Include="Views\Login\IndexAdm.cshtml" />
