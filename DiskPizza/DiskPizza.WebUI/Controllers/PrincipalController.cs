@@ -10,6 +10,8 @@ namespace DiskPizza.WebUI.Controllers
     [Authorize]
     public class PrincipalController : Controller
     {
+        public static TimeZoneInfo zone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
+
         public ActionResult Index()
         {
             ViewBag.Tipos = new ProdutoDAO().BuscarTodos().Select(o => o.Tipo).Distinct().ToList();
@@ -28,7 +30,7 @@ namespace DiskPizza.WebUI.Controllers
 
         public ActionResult SalvarPedido(Pedido obj)
         {
-            obj.Data = DateTime.Now;
+            obj.Data = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Local, zone);
             obj.Usuario = new Usuario() { Id = ((Usuario)User).Id };
             new PedidoDAO().Inserir(obj);
             return View();
@@ -36,7 +38,7 @@ namespace DiskPizza.WebUI.Controllers
 
         public ActionResult Finalizar(Pedido obj)
         {
-            obj.Data = DateTime.Now;
+            obj.Data = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Local, zone);
             obj.Usuario = new Usuario() { Id = ((Usuario)User).Id };
             return View();
         }
@@ -53,7 +55,7 @@ namespace DiskPizza.WebUI.Controllers
             if (pedido == null)
             {
                 pedido = new Pedido();
-                pedido.Data = DateTime.Now;
+                pedido.Data = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Local, zone);
                 pedido.Usuario = new Usuario() { Id = ((Usuario)User).Id };
                 pedido.QtdSabores = quantidadeDeSabores;
                 pedido.Status = "PENDENTE";

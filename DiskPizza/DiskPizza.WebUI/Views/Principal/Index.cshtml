@@ -112,6 +112,7 @@
                                     $("#pedido").show();
                                 },
                                 error: function (result) {
+                                    console.log(result);
                                     alert(result);
                                 }
                             });
@@ -194,6 +195,7 @@
                         adicionarItem();
                     },
                     error: function (result) {
+                        console.log(result);
                         alert(result);
                     }
                 });

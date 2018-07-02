@@ -24,7 +24,7 @@
                     @foreach (var pedido in Model)
                     {
                         <tr>
-                            <td>@string.Format("{0:dd/MM/yyyy}", pedido.Data)</td>
+                            <td>@string.Format("{0:dd/MM/yyyy HH:mm}", pedido.Data)</td>
                             <td>@pedido.Status</td>
                             <td>@pedido.Rua</td>
                             <td>@pedido.Numero</td>

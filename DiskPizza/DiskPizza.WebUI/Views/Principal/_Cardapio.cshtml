@@ -13,7 +13,7 @@
                 </thead>
                 <tbody>
                     @foreach (var pizza in ((List<Produto_x_Tamanho>)ViewBag.Pizzas).Where(o => o.Produto.Tipo == tipo))
-                {
+                    {
                         <tr>
                             <td style="width: 50%;">
                                 @pizza.Produto.Nome
